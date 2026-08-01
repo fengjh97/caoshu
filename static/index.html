@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>草书</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="草书">
+<meta name="theme-color" content="#f5f0e3">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/static/icons/icon-180.png">
+<link rel="icon" href="/static/icons/icon-192.png">
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ======== 今日 ======== -->
+  <main id="view-today" class="view">
+    <header class="page-head">
+      <h1 class="cursive-title">草书</h1>
+      <span id="streak-badge" class="seal-badge hidden">连 0 天</span>
+    </header>
+    <div class="stat-row">
+      <div class="ink-card stat-tile">
+        <div class="stat-num" id="stat-new">–</div>
+        <div class="stat-label">今日新学</div>
+      </div>
+      <div class="ink-card stat-tile">
+        <div class="stat-num" id="stat-review">–</div>
+        <div class="stat-label">到期复习</div>
+      </div>
+    </div>
+    <div class="ink-card today-card">
+      <div id="today-hint" class="today-hint">加载中…</div>
+      <button id="btn-start" class="ink-btn" disabled>开始今日练习</button>
+    </div>
+    <p id="gemini-hint" class="faint-note hidden">未配置 Gemini API Key，盲写将以自评模式进行 → 设置</p>
+  </main>
+
+  <!-- ======== 练习会话 ======== -->
+  <main id="view-study" class="view hidden">
+    <header class="study-head">
+      <button id="btn-exit-study" class="icon-btn" aria-label="退出">✕</button>
+      <div class="study-progress"><div id="study-progress-fill" class="study-progress-fill"></div></div>
+      <span id="study-count" class="study-count">0/0</span>
+    </header>
+    <section id="study-body"><!-- JS 渲染 --></section>
+  </main>
+
+  <!-- ======== 认字（自由练习） ======== -->
+  <main id="view-recognize" class="view hidden">
+    <header class="page-head"><h1 class="page-title">认字</h1>
+      <span id="quiz-tally" class="seal-badge hidden">0 / 0</span></header>
+    <p class="faint-note">自由练习，不影响复习计划。</p>
+    <section id="quiz-body"></section>
+  </main>
+
+  <!-- ======== 拆解 ======== -->
+  <main id="view-decomp" class="view hidden">
+    <header class="page-head"><h1 class="page-title">拆解</h1></header>
+    <div id="decomp-index">
+      <input id="decomp-search" class="search-input" type="search" placeholder="搜字 / 拼音" autocomplete="off">
+      <div id="char-grid" class="char-grid"></div>
+    </div>
+    <div id="decomp-detail" class="hidden"></div>
+  </main>
+
+  <!-- ======== 进度 ======== -->
+  <main id="view-progress" class="view hidden">
+    <header class="page-head"><h1 class="page-title">进度</h1></header>
+    <section id="progress-body"><p class="faint-note">加载中…</p></section>
+  </main>
+
+  <!-- ======== 设置 ======== -->
+  <main id="view-settings" class="view hidden">
+    <header class="page-head"><h1 class="page-title">设置</h1></header>
+    <div class="ink-card">
+      <div class="section-label">学习</div>
+      <label class="setting-row">
+        <span>每日新卡上限</span>
+        <span class="stepper">
+          <button id="limit-minus" class="stepper-btn">−</button>
+          <span id="limit-value" class="stepper-value">10</span>
+          <button id="limit-plus" class="stepper-btn">＋</button>
+        </span>
+      </label>
+    </div>
+    <div class="ink-card">
+      <div class="section-label">Gemini 判定</div>
+      <div class="setting-row">
+        <span>状态</span>
+        <span id="key-status" class="key-status">未配置</span>
+      </div>
+      <input id="key-input" class="search-input" type="password" placeholder="粘贴 Gemini API Key" autocomplete="off">
+      <div class="btn-row">
+        <button id="btn-save-key" class="ink-btn small">保存 Key</button>
+        <button id="btn-clear-key" class="ink-btn small outline">清除</button>
+      </div>
+      <p class="faint-note">Key 只保存在你自己的 Mac 上（data/config.json），不进浏览器。</p>
+    </div>
+    <div class="ink-card">
+      <div class="section-label">关于</div>
+      <p class="about-text">草书版多邻国 + Anki · 500 高频字 · FSRS 调度<br>
+      字体：钟齐流江毛草（OFL）· 真迹：书法字典</p>
+    </div>
+  </main>
+
+  <!-- ======== 底部标签栏 ======== -->
+  <nav id="tabbar">
+    <button class="tab active" data-view="today"><span class="tab-ico">今</span>今日</button>
+    <button class="tab" data-view="recognize"><span class="tab-ico">认</span>认字</button>
+    <button class="tab" data-view="decomp"><span class="tab-ico">拆</span>拆解</button>
+    <button class="tab" data-view="progress"><span class="tab-ico">进</span>进度</button>
+    <button class="tab" data-view="settings"><span class="tab-ico">设</span>设置</button>
+  </nav>
+
+</div>
+<script src="/static/app.js"></script>
+</body>
+</html>

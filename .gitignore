@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+data/caoshu.db
+data/config.json
+data/calligraphy/
+.DS_Store

@@ -1,0 +1,2502 @@
+[
+ {
+  "kai": "的",
+  "pinyin": "de",
+  "freqRank": 1
+ },
+ {
+  "kai": "一",
+  "pinyin": "yī",
+  "freqRank": 2
+ },
+ {
+  "kai": "是",
+  "pinyin": "shì",
+  "freqRank": 3
+ },
+ {
+  "kai": "不",
+  "pinyin": "bù",
+  "freqRank": 4
+ },
+ {
+  "kai": "了",
+  "pinyin": "le",
+  "freqRank": 5
+ },
+ {
+  "kai": "在",
+  "pinyin": "zài",
+  "freqRank": 6
+ },
+ {
+  "kai": "人",
+  "pinyin": "rén",
+  "freqRank": 7
+ },
+ {
+  "kai": "有",
+  "pinyin": "yǒu",
+  "freqRank": 8
+ },
+ {
+  "kai": "我",
+  "pinyin": "wǒ",
+  "freqRank": 9
+ },
+ {
+  "kai": "他",
+  "pinyin": "tā",
+  "freqRank": 10
+ },
+ {
+  "kai": "这",
+  "pinyin": "zhè",
+  "freqRank": 11
+ },
+ {
+  "kai": "个",
+  "pinyin": "gè",
+  "freqRank": 12
+ },
+ {
+  "kai": "们",
+  "pinyin": "men",
+  "freqRank": 13
+ },
+ {
+  "kai": "中",
+  "pinyin": "zhōng",
+  "freqRank": 14
+ },
+ {
+  "kai": "来",
+  "pinyin": "lái",
+  "freqRank": 15
+ },
+ {
+  "kai": "上",
+  "pinyin": "shàng",
+  "freqRank": 16
+ },
+ {
+  "kai": "大",
+  "pinyin": "dà",
+  "freqRank": 17
+ },
+ {
+  "kai": "为",
+  "pinyin": "wèi",
+  "freqRank": 18
+ },
+ {
+  "kai": "和",
+  "pinyin": "hé",
+  "freqRank": 19
+ },
+ {
+  "kai": "国",
+  "pinyin": "guó",
+  "freqRank": 20
+ },
+ {
+  "kai": "地",
+  "pinyin": "dì",
+  "freqRank": 21
+ },
+ {
+  "kai": "到",
+  "pinyin": "dào",
+  "freqRank": 22
+ },
+ {
+  "kai": "以",
+  "pinyin": "yǐ",
+  "freqRank": 23
+ },
+ {
+  "kai": "说",
+  "pinyin": "shuō",
+  "freqRank": 24
+ },
+ {
+  "kai": "时",
+  "pinyin": "shí",
+  "freqRank": 25
+ },
+ {
+  "kai": "要",
+  "pinyin": "yào",
+  "freqRank": 26
+ },
+ {
+  "kai": "就",
+  "pinyin": "jiù",
+  "freqRank": 27
+ },
+ {
+  "kai": "出",
+  "pinyin": "chū",
+  "freqRank": 28
+ },
+ {
+  "kai": "会",
+  "pinyin": "huì",
+  "freqRank": 29
+ },
+ {
+  "kai": "可",
+  "pinyin": "kě",
+  "freqRank": 30
+ },
+ {
+  "kai": "也",
+  "pinyin": "yě",
+  "freqRank": 31
+ },
+ {
+  "kai": "你",
+  "pinyin": "nǐ",
+  "freqRank": 32
+ },
+ {
+  "kai": "对",
+  "pinyin": "duì",
+  "freqRank": 33
+ },
+ {
+  "kai": "生",
+  "pinyin": "shēng",
+  "freqRank": 34
+ },
+ {
+  "kai": "能",
+  "pinyin": "néng",
+  "freqRank": 35
+ },
+ {
+  "kai": "而",
+  "pinyin": "ér",
+  "freqRank": 36
+ },
+ {
+  "kai": "子",
+  "pinyin": "zi",
+  "freqRank": 37
+ },
+ {
+  "kai": "那",
+  "pinyin": "nà",
+  "freqRank": 38
+ },
+ {
+  "kai": "得",
+  "pinyin": "dé",
+  "freqRank": 39
+ },
+ {
+  "kai": "于",
+  "pinyin": "yú",
+  "freqRank": 40
+ },
+ {
+  "kai": "着",
+  "pinyin": "zhe",
+  "freqRank": 41
+ },
+ {
+  "kai": "下",
+  "pinyin": "xià",
+  "freqRank": 42
+ },
+ {
+  "kai": "自",
+  "pinyin": "zì",
+  "freqRank": 43
+ },
+ {
+  "kai": "之",
+  "pinyin": "zhī",
+  "freqRank": 44
+ },
+ {
+  "kai": "年",
+  "pinyin": "nián",
+  "freqRank": 45
+ },
+ {
+  "kai": "过",
+  "pinyin": "guò",
+  "freqRank": 46
+ },
+ {
+  "kai": "发",
+  "pinyin": "fā",
+  "freqRank": 47
+ },
+ {
+  "kai": "后",
+  "pinyin": "hòu",
+  "freqRank": 48
+ },
+ {
+  "kai": "作",
+  "pinyin": "zuò",
+  "freqRank": 49
+ },
+ {
+  "kai": "里",
+  "pinyin": "lǐ",
+  "freqRank": 50
+ },
+ {
+  "kai": "用",
+  "pinyin": "yòng",
+  "freqRank": 51
+ },
+ {
+  "kai": "道",
+  "pinyin": "dào",
+  "freqRank": 52
+ },
+ {
+  "kai": "行",
+  "pinyin": "xíng",
+  "freqRank": 53
+ },
+ {
+  "kai": "所",
+  "pinyin": "suǒ",
+  "freqRank": 54
+ },
+ {
+  "kai": "然",
+  "pinyin": "rán",
+  "freqRank": 55
+ },
+ {
+  "kai": "家",
+  "pinyin": "jiā",
+  "freqRank": 56
+ },
+ {
+  "kai": "种",
+  "pinyin": "zhǒng",
+  "freqRank": 57
+ },
+ {
+  "kai": "事",
+  "pinyin": "shì",
+  "freqRank": 58
+ },
+ {
+  "kai": "成",
+  "pinyin": "chéng",
+  "freqRank": 59
+ },
+ {
+  "kai": "方",
+  "pinyin": "fāng",
+  "freqRank": 60
+ },
+ {
+  "kai": "多",
+  "pinyin": "duō",
+  "freqRank": 61
+ },
+ {
+  "kai": "经",
+  "pinyin": "jīng",
+  "freqRank": 62
+ },
+ {
+  "kai": "么",
+  "pinyin": "me",
+  "freqRank": 63
+ },
+ {
+  "kai": "去",
+  "pinyin": "qù",
+  "freqRank": 64
+ },
+ {
+  "kai": "法",
+  "pinyin": "fǎ",
+  "freqRank": 65
+ },
+ {
+  "kai": "学",
+  "pinyin": "xué",
+  "freqRank": 66
+ },
+ {
+  "kai": "如",
+  "pinyin": "rú",
+  "freqRank": 67
+ },
+ {
+  "kai": "都",
+  "pinyin": "dōu",
+  "freqRank": 68
+ },
+ {
+  "kai": "同",
+  "pinyin": "tóng",
+  "freqRank": 69
+ },
+ {
+  "kai": "现",
+  "pinyin": "xiàn",
+  "freqRank": 70
+ },
+ {
+  "kai": "当",
+  "pinyin": "dāng",
+  "freqRank": 71
+ },
+ {
+  "kai": "没",
+  "pinyin": "méi",
+  "freqRank": 72
+ },
+ {
+  "kai": "动",
+  "pinyin": "dòng",
+  "freqRank": 73
+ },
+ {
+  "kai": "面",
+  "pinyin": "miàn",
+  "freqRank": 74
+ },
+ {
+  "kai": "起",
+  "pinyin": "qǐ",
+  "freqRank": 75
+ },
+ {
+  "kai": "看",
+  "pinyin": "kàn",
+  "freqRank": 76
+ },
+ {
+  "kai": "定",
+  "pinyin": "dìng",
+  "freqRank": 77
+ },
+ {
+  "kai": "天",
+  "pinyin": "tiān",
+  "freqRank": 78
+ },
+ {
+  "kai": "分",
+  "pinyin": "fēn",
+  "freqRank": 79
+ },
+ {
+  "kai": "还",
+  "pinyin": "hái",
+  "freqRank": 80
+ },
+ {
+  "kai": "进",
+  "pinyin": "jìn",
+  "freqRank": 81
+ },
+ {
+  "kai": "好",
+  "pinyin": "hǎo",
+  "freqRank": 82
+ },
+ {
+  "kai": "小",
+  "pinyin": "xiǎo",
+  "freqRank": 83
+ },
+ {
+  "kai": "部",
+  "pinyin": "bù",
+  "freqRank": 84
+ },
+ {
+  "kai": "其",
+  "pinyin": "qí",
+  "freqRank": 85
+ },
+ {
+  "kai": "些",
+  "pinyin": "xiē",
+  "freqRank": 86
+ },
+ {
+  "kai": "主",
+  "pinyin": "zhǔ",
+  "freqRank": 87
+ },
+ {
+  "kai": "样",
+  "pinyin": "yàng",
+  "freqRank": 88
+ },
+ {
+  "kai": "理",
+  "pinyin": "lǐ",
+  "freqRank": 89
+ },
+ {
+  "kai": "心",
+  "pinyin": "xīn",
+  "freqRank": 90
+ },
+ {
+  "kai": "她",
+  "pinyin": "tā",
+  "freqRank": 91
+ },
+ {
+  "kai": "本",
+  "pinyin": "běn",
+  "freqRank": 92
+ },
+ {
+  "kai": "前",
+  "pinyin": "qián",
+  "freqRank": 93
+ },
+ {
+  "kai": "开",
+  "pinyin": "kāi",
+  "freqRank": 94
+ },
+ {
+  "kai": "但",
+  "pinyin": "dàn",
+  "freqRank": 95
+ },
+ {
+  "kai": "因",
+  "pinyin": "yīn",
+  "freqRank": 96
+ },
+ {
+  "kai": "只",
+  "pinyin": "zhǐ",
+  "freqRank": 97
+ },
+ {
+  "kai": "从",
+  "pinyin": "cóng",
+  "freqRank": 98
+ },
+ {
+  "kai": "想",
+  "pinyin": "xiǎng",
+  "freqRank": 99
+ },
+ {
+  "kai": "实",
+  "pinyin": "shí",
+  "freqRank": 100
+ },
+ {
+  "kai": "日",
+  "pinyin": "rì",
+  "freqRank": 101
+ },
+ {
+  "kai": "军",
+  "pinyin": "jūn",
+  "freqRank": 102
+ },
+ {
+  "kai": "者",
+  "pinyin": "zhě",
+  "freqRank": 103
+ },
+ {
+  "kai": "意",
+  "pinyin": "yì",
+  "freqRank": 104
+ },
+ {
+  "kai": "无",
+  "pinyin": "wú",
+  "freqRank": 105
+ },
+ {
+  "kai": "力",
+  "pinyin": "lì",
+  "freqRank": 106
+ },
+ {
+  "kai": "它",
+  "pinyin": "tā",
+  "freqRank": 107
+ },
+ {
+  "kai": "与",
+  "pinyin": "yǔ",
+  "freqRank": 108
+ },
+ {
+  "kai": "长",
+  "pinyin": "zhǎng",
+  "freqRank": 109
+ },
+ {
+  "kai": "把",
+  "pinyin": "bǎ",
+  "freqRank": 110
+ },
+ {
+  "kai": "机",
+  "pinyin": "jī",
+  "freqRank": 111
+ },
+ {
+  "kai": "十",
+  "pinyin": "shí",
+  "freqRank": 112
+ },
+ {
+  "kai": "民",
+  "pinyin": "mín",
+  "freqRank": 113
+ },
+ {
+  "kai": "第",
+  "pinyin": "dì",
+  "freqRank": 114
+ },
+ {
+  "kai": "公",
+  "pinyin": "gōng",
+  "freqRank": 115
+ },
+ {
+  "kai": "此",
+  "pinyin": "cǐ",
+  "freqRank": 116
+ },
+ {
+  "kai": "已",
+  "pinyin": "yǐ",
+  "freqRank": 117
+ },
+ {
+  "kai": "工",
+  "pinyin": "gōng",
+  "freqRank": 118
+ },
+ {
+  "kai": "使",
+  "pinyin": "shǐ",
+  "freqRank": 119
+ },
+ {
+  "kai": "情",
+  "pinyin": "qíng",
+  "freqRank": 120
+ },
+ {
+  "kai": "明",
+  "pinyin": "míng",
+  "freqRank": 121
+ },
+ {
+  "kai": "性",
+  "pinyin": "xìng",
+  "freqRank": 122
+ },
+ {
+  "kai": "知",
+  "pinyin": "zhī",
+  "freqRank": 123
+ },
+ {
+  "kai": "全",
+  "pinyin": "quán",
+  "freqRank": 124
+ },
+ {
+  "kai": "三",
+  "pinyin": "sān",
+  "freqRank": 125
+ },
+ {
+  "kai": "又",
+  "pinyin": "yòu",
+  "freqRank": 126
+ },
+ {
+  "kai": "关",
+  "pinyin": "guān",
+  "freqRank": 127
+ },
+ {
+  "kai": "点",
+  "pinyin": "diǎn",
+  "freqRank": 128
+ },
+ {
+  "kai": "正",
+  "pinyin": "zhèng",
+  "freqRank": 129
+ },
+ {
+  "kai": "业",
+  "pinyin": "yè",
+  "freqRank": 130
+ },
+ {
+  "kai": "外",
+  "pinyin": "wài",
+  "freqRank": 131
+ },
+ {
+  "kai": "将",
+  "pinyin": "jiāng",
+  "freqRank": 132
+ },
+ {
+  "kai": "两",
+  "pinyin": "liǎng",
+  "freqRank": 133
+ },
+ {
+  "kai": "高",
+  "pinyin": "gāo",
+  "freqRank": 134
+ },
+ {
+  "kai": "间",
+  "pinyin": "jiān",
+  "freqRank": 135
+ },
+ {
+  "kai": "由",
+  "pinyin": "yóu",
+  "freqRank": 136
+ },
+ {
+  "kai": "问",
+  "pinyin": "wèn",
+  "freqRank": 137
+ },
+ {
+  "kai": "很",
+  "pinyin": "hěn",
+  "freqRank": 138
+ },
+ {
+  "kai": "最",
+  "pinyin": "zuì",
+  "freqRank": 139
+ },
+ {
+  "kai": "重",
+  "pinyin": "zhòng",
+  "freqRank": 140
+ },
+ {
+  "kai": "并",
+  "pinyin": "bìng",
+  "freqRank": 141
+ },
+ {
+  "kai": "物",
+  "pinyin": "wù",
+  "freqRank": 142
+ },
+ {
+  "kai": "手",
+  "pinyin": "shǒu",
+  "freqRank": 143
+ },
+ {
+  "kai": "应",
+  "pinyin": "yīng",
+  "freqRank": 144
+ },
+ {
+  "kai": "战",
+  "pinyin": "zhàn",
+  "freqRank": 145
+ },
+ {
+  "kai": "向",
+  "pinyin": "xiàng",
+  "freqRank": 146
+ },
+ {
+  "kai": "头",
+  "pinyin": "tóu",
+  "freqRank": 147
+ },
+ {
+  "kai": "文",
+  "pinyin": "wén",
+  "freqRank": 148
+ },
+ {
+  "kai": "体",
+  "pinyin": "tǐ",
+  "freqRank": 149
+ },
+ {
+  "kai": "政",
+  "pinyin": "zhèng",
+  "freqRank": 150
+ },
+ {
+  "kai": "美",
+  "pinyin": "měi",
+  "freqRank": 151
+ },
+ {
+  "kai": "相",
+  "pinyin": "xiāng",
+  "freqRank": 152
+ },
+ {
+  "kai": "见",
+  "pinyin": "jiàn",
+  "freqRank": 153
+ },
+ {
+  "kai": "被",
+  "pinyin": "bèi",
+  "freqRank": 154
+ },
+ {
+  "kai": "利",
+  "pinyin": "lì",
+  "freqRank": 155
+ },
+ {
+  "kai": "什",
+  "pinyin": "shén",
+  "freqRank": 156
+ },
+ {
+  "kai": "二",
+  "pinyin": "èr",
+  "freqRank": 157
+ },
+ {
+  "kai": "等",
+  "pinyin": "děng",
+  "freqRank": 158
+ },
+ {
+  "kai": "产",
+  "pinyin": "chǎn",
+  "freqRank": 159
+ },
+ {
+  "kai": "或",
+  "pinyin": "huò",
+  "freqRank": 160
+ },
+ {
+  "kai": "新",
+  "pinyin": "xīn",
+  "freqRank": 161
+ },
+ {
+  "kai": "己",
+  "pinyin": "jǐ",
+  "freqRank": 162
+ },
+ {
+  "kai": "制",
+  "pinyin": "zhì",
+  "freqRank": 163
+ },
+ {
+  "kai": "身",
+  "pinyin": "shēn",
+  "freqRank": 164
+ },
+ {
+  "kai": "果",
+  "pinyin": "guǒ",
+  "freqRank": 165
+ },
+ {
+  "kai": "加",
+  "pinyin": "jiā",
+  "freqRank": 166
+ },
+ {
+  "kai": "西",
+  "pinyin": "xī",
+  "freqRank": 167
+ },
+ {
+  "kai": "斯",
+  "pinyin": "sī",
+  "freqRank": 168
+ },
+ {
+  "kai": "月",
+  "pinyin": "yuè",
+  "freqRank": 169
+ },
+ {
+  "kai": "话",
+  "pinyin": "huà",
+  "freqRank": 170
+ },
+ {
+  "kai": "合",
+  "pinyin": "hé",
+  "freqRank": 171
+ },
+ {
+  "kai": "回",
+  "pinyin": "huí",
+  "freqRank": 172
+ },
+ {
+  "kai": "特",
+  "pinyin": "tè",
+  "freqRank": 173
+ },
+ {
+  "kai": "代",
+  "pinyin": "dài",
+  "freqRank": 174
+ },
+ {
+  "kai": "内",
+  "pinyin": "nèi",
+  "freqRank": 175
+ },
+ {
+  "kai": "信",
+  "pinyin": "xìn",
+  "freqRank": 176
+ },
+ {
+  "kai": "表",
+  "pinyin": "biǎo",
+  "freqRank": 177
+ },
+ {
+  "kai": "化",
+  "pinyin": "huà",
+  "freqRank": 178
+ },
+ {
+  "kai": "老",
+  "pinyin": "lǎo",
+  "freqRank": 179
+ },
+ {
+  "kai": "给",
+  "pinyin": "gěi",
+  "freqRank": 180
+ },
+ {
+  "kai": "世",
+  "pinyin": "shì",
+  "freqRank": 181
+ },
+ {
+  "kai": "位",
+  "pinyin": "wèi",
+  "freqRank": 182
+ },
+ {
+  "kai": "次",
+  "pinyin": "cì",
+  "freqRank": 183
+ },
+ {
+  "kai": "度",
+  "pinyin": "dù",
+  "freqRank": 184
+ },
+ {
+  "kai": "门",
+  "pinyin": "mén",
+  "freqRank": 185
+ },
+ {
+  "kai": "任",
+  "pinyin": "rèn",
+  "freqRank": 186
+ },
+ {
+  "kai": "常",
+  "pinyin": "cháng",
+  "freqRank": 187
+ },
+ {
+  "kai": "先",
+  "pinyin": "xiān",
+  "freqRank": 188
+ },
+ {
+  "kai": "海",
+  "pinyin": "hǎi",
+  "freqRank": 189
+ },
+ {
+  "kai": "通",
+  "pinyin": "tōng",
+  "freqRank": 190
+ },
+ {
+  "kai": "教",
+  "pinyin": "jiào",
+  "freqRank": 191
+ },
+ {
+  "kai": "儿",
+  "pinyin": "ér",
+  "freqRank": 192
+ },
+ {
+  "kai": "原",
+  "pinyin": "yuán",
+  "freqRank": 193
+ },
+ {
+  "kai": "东",
+  "pinyin": "dōng",
+  "freqRank": 194
+ },
+ {
+  "kai": "声",
+  "pinyin": "shēng",
+  "freqRank": 195
+ },
+ {
+  "kai": "提",
+  "pinyin": "tí",
+  "freqRank": 196
+ },
+ {
+  "kai": "立",
+  "pinyin": "lì",
+  "freqRank": 197
+ },
+ {
+  "kai": "及",
+  "pinyin": "jí",
+  "freqRank": 198
+ },
+ {
+  "kai": "比",
+  "pinyin": "bǐ",
+  "freqRank": 199
+ },
+ {
+  "kai": "员",
+  "pinyin": "yuán",
+  "freqRank": 200
+ },
+ {
+  "kai": "解",
+  "pinyin": "jiě",
+  "freqRank": 201
+ },
+ {
+  "kai": "水",
+  "pinyin": "shuǐ",
+  "freqRank": 202
+ },
+ {
+  "kai": "名",
+  "pinyin": "míng",
+  "freqRank": 203
+ },
+ {
+  "kai": "真",
+  "pinyin": "zhēn",
+  "freqRank": 204
+ },
+ {
+  "kai": "论",
+  "pinyin": "lùn",
+  "freqRank": 205
+ },
+ {
+  "kai": "处",
+  "pinyin": "chù",
+  "freqRank": 206
+ },
+ {
+  "kai": "走",
+  "pinyin": "zǒu",
+  "freqRank": 207
+ },
+ {
+  "kai": "义",
+  "pinyin": "yì",
+  "freqRank": 208
+ },
+ {
+  "kai": "各",
+  "pinyin": "gè",
+  "freqRank": 209
+ },
+ {
+  "kai": "入",
+  "pinyin": "rù",
+  "freqRank": 210
+ },
+ {
+  "kai": "几",
+  "pinyin": "jǐ",
+  "freqRank": 211
+ },
+ {
+  "kai": "口",
+  "pinyin": "kǒu",
+  "freqRank": 212
+ },
+ {
+  "kai": "认",
+  "pinyin": "rèn",
+  "freqRank": 213
+ },
+ {
+  "kai": "条",
+  "pinyin": "tiáo",
+  "freqRank": 214
+ },
+ {
+  "kai": "平",
+  "pinyin": "píng",
+  "freqRank": 215
+ },
+ {
+  "kai": "系",
+  "pinyin": "xì",
+  "freqRank": 216
+ },
+ {
+  "kai": "气",
+  "pinyin": "qì",
+  "freqRank": 217
+ },
+ {
+  "kai": "题",
+  "pinyin": "tí",
+  "freqRank": 218
+ },
+ {
+  "kai": "活",
+  "pinyin": "huó",
+  "freqRank": 219
+ },
+ {
+  "kai": "尔",
+  "pinyin": "ěr",
+  "freqRank": 220
+ },
+ {
+  "kai": "更",
+  "pinyin": "gèng",
+  "freqRank": 221
+ },
+ {
+  "kai": "别",
+  "pinyin": "bié",
+  "freqRank": 222
+ },
+ {
+  "kai": "打",
+  "pinyin": "dǎ",
+  "freqRank": 223
+ },
+ {
+  "kai": "女",
+  "pinyin": "nǚ",
+  "freqRank": 224
+ },
+ {
+  "kai": "变",
+  "pinyin": "biàn",
+  "freqRank": 225
+ },
+ {
+  "kai": "四",
+  "pinyin": "sì",
+  "freqRank": 226
+ },
+ {
+  "kai": "神",
+  "pinyin": "shén",
+  "freqRank": 227
+ },
+ {
+  "kai": "总",
+  "pinyin": "zǒng",
+  "freqRank": 228
+ },
+ {
+  "kai": "何",
+  "pinyin": "hé",
+  "freqRank": 229
+ },
+ {
+  "kai": "电",
+  "pinyin": "diàn",
+  "freqRank": 230
+ },
+ {
+  "kai": "数",
+  "pinyin": "shù",
+  "freqRank": 231
+ },
+ {
+  "kai": "安",
+  "pinyin": "ān",
+  "freqRank": 232
+ },
+ {
+  "kai": "少",
+  "pinyin": "shǎo",
+  "freqRank": 233
+ },
+ {
+  "kai": "报",
+  "pinyin": "bào",
+  "freqRank": 234
+ },
+ {
+  "kai": "才",
+  "pinyin": "cái",
+  "freqRank": 235
+ },
+ {
+  "kai": "结",
+  "pinyin": "jié",
+  "freqRank": 236
+ },
+ {
+  "kai": "反",
+  "pinyin": "fǎn",
+  "freqRank": 237
+ },
+ {
+  "kai": "受",
+  "pinyin": "shòu",
+  "freqRank": 238
+ },
+ {
+  "kai": "目",
+  "pinyin": "mù",
+  "freqRank": 239
+ },
+ {
+  "kai": "太",
+  "pinyin": "tài",
+  "freqRank": 240
+ },
+ {
+  "kai": "量",
+  "pinyin": "liàng",
+  "freqRank": 241
+ },
+ {
+  "kai": "再",
+  "pinyin": "zài",
+  "freqRank": 242
+ },
+ {
+  "kai": "感",
+  "pinyin": "gǎn",
+  "freqRank": 243
+ },
+ {
+  "kai": "建",
+  "pinyin": "jiàn",
+  "freqRank": 244
+ },
+ {
+  "kai": "务",
+  "pinyin": "wù",
+  "freqRank": 245
+ },
+ {
+  "kai": "做",
+  "pinyin": "zuò",
+  "freqRank": 246
+ },
+ {
+  "kai": "接",
+  "pinyin": "jiē",
+  "freqRank": 247
+ },
+ {
+  "kai": "必",
+  "pinyin": "bì",
+  "freqRank": 248
+ },
+ {
+  "kai": "场",
+  "pinyin": "chǎng",
+  "freqRank": 249
+ },
+ {
+  "kai": "件",
+  "pinyin": "jiàn",
+  "freqRank": 250
+ },
+ {
+  "kai": "计",
+  "pinyin": "jì",
+  "freqRank": 251
+ },
+ {
+  "kai": "管",
+  "pinyin": "guǎn",
+  "freqRank": 252
+ },
+ {
+  "kai": "期",
+  "pinyin": "qī",
+  "freqRank": 253
+ },
+ {
+  "kai": "市",
+  "pinyin": "shì",
+  "freqRank": 254
+ },
+ {
+  "kai": "直",
+  "pinyin": "zhí",
+  "freqRank": 255
+ },
+ {
+  "kai": "德",
+  "pinyin": "dé",
+  "freqRank": 256
+ },
+ {
+  "kai": "资",
+  "pinyin": "zī",
+  "freqRank": 257
+ },
+ {
+  "kai": "命",
+  "pinyin": "mìng",
+  "freqRank": 258
+ },
+ {
+  "kai": "山",
+  "pinyin": "shān",
+  "freqRank": 259
+ },
+ {
+  "kai": "金",
+  "pinyin": "jīn",
+  "freqRank": 260
+ },
+ {
+  "kai": "指",
+  "pinyin": "zhǐ",
+  "freqRank": 261
+ },
+ {
+  "kai": "克",
+  "pinyin": "kè",
+  "freqRank": 262
+ },
+ {
+  "kai": "许",
+  "pinyin": "xǔ",
+  "freqRank": 263
+ },
+ {
+  "kai": "统",
+  "pinyin": "tǒng",
+  "freqRank": 264
+ },
+ {
+  "kai": "区",
+  "pinyin": "qū",
+  "freqRank": 265
+ },
+ {
+  "kai": "保",
+  "pinyin": "bǎo",
+  "freqRank": 266
+ },
+ {
+  "kai": "至",
+  "pinyin": "zhì",
+  "freqRank": 267
+ },
+ {
+  "kai": "队",
+  "pinyin": "duì",
+  "freqRank": 268
+ },
+ {
+  "kai": "形",
+  "pinyin": "xíng",
+  "freqRank": 269
+ },
+ {
+  "kai": "社",
+  "pinyin": "shè",
+  "freqRank": 270
+ },
+ {
+  "kai": "便",
+  "pinyin": "biàn",
+  "freqRank": 271
+ },
+ {
+  "kai": "空",
+  "pinyin": "kōng",
+  "freqRank": 272
+ },
+ {
+  "kai": "决",
+  "pinyin": "jué",
+  "freqRank": 273
+ },
+ {
+  "kai": "治",
+  "pinyin": "zhì",
+  "freqRank": 274
+ },
+ {
+  "kai": "展",
+  "pinyin": "zhǎn",
+  "freqRank": 275
+ },
+ {
+  "kai": "马",
+  "pinyin": "mǎ",
+  "freqRank": 276
+ },
+ {
+  "kai": "科",
+  "pinyin": "kē",
+  "freqRank": 277
+ },
+ {
+  "kai": "司",
+  "pinyin": "sī",
+  "freqRank": 278
+ },
+ {
+  "kai": "五",
+  "pinyin": "wǔ",
+  "freqRank": 279
+ },
+ {
+  "kai": "基",
+  "pinyin": "jī",
+  "freqRank": 280
+ },
+ {
+  "kai": "眼",
+  "pinyin": "yǎn",
+  "freqRank": 281
+ },
+ {
+  "kai": "书",
+  "pinyin": "shū",
+  "freqRank": 282
+ },
+ {
+  "kai": "非",
+  "pinyin": "fēi",
+  "freqRank": 283
+ },
+ {
+  "kai": "则",
+  "pinyin": "zé",
+  "freqRank": 284
+ },
+ {
+  "kai": "听",
+  "pinyin": "tīng",
+  "freqRank": 285
+ },
+ {
+  "kai": "白",
+  "pinyin": "bái",
+  "freqRank": 286
+ },
+ {
+  "kai": "却",
+  "pinyin": "què",
+  "freqRank": 287
+ },
+ {
+  "kai": "界",
+  "pinyin": "jiè",
+  "freqRank": 288
+ },
+ {
+  "kai": "达",
+  "pinyin": "dá",
+  "freqRank": 289
+ },
+ {
+  "kai": "光",
+  "pinyin": "guāng",
+  "freqRank": 290
+ },
+ {
+  "kai": "放",
+  "pinyin": "fàng",
+  "freqRank": 291
+ },
+ {
+  "kai": "强",
+  "pinyin": "qiáng",
+  "freqRank": 292
+ },
+ {
+  "kai": "即",
+  "pinyin": "jí",
+  "freqRank": 293
+ },
+ {
+  "kai": "像",
+  "pinyin": "xiàng",
+  "freqRank": 294
+ },
+ {
+  "kai": "难",
+  "pinyin": "nán",
+  "freqRank": 295
+ },
+ {
+  "kai": "且",
+  "pinyin": "qiě",
+  "freqRank": 296
+ },
+ {
+  "kai": "权",
+  "pinyin": "quán",
+  "freqRank": 297
+ },
+ {
+  "kai": "思",
+  "pinyin": "sī",
+  "freqRank": 298
+ },
+ {
+  "kai": "王",
+  "pinyin": "wáng",
+  "freqRank": 299
+ },
+ {
+  "kai": "象",
+  "pinyin": "xiàng",
+  "freqRank": 300
+ },
+ {
+  "kai": "完",
+  "pinyin": "wán",
+  "freqRank": 301
+ },
+ {
+  "kai": "设",
+  "pinyin": "shè",
+  "freqRank": 302
+ },
+ {
+  "kai": "式",
+  "pinyin": "shì",
+  "freqRank": 303
+ },
+ {
+  "kai": "色",
+  "pinyin": "sè",
+  "freqRank": 304
+ },
+ {
+  "kai": "路",
+  "pinyin": "lù",
+  "freqRank": 305
+ },
+ {
+  "kai": "记",
+  "pinyin": "jì",
+  "freqRank": 306
+ },
+ {
+  "kai": "南",
+  "pinyin": "nán",
+  "freqRank": 307
+ },
+ {
+  "kai": "品",
+  "pinyin": "pǐn",
+  "freqRank": 308
+ },
+ {
+  "kai": "住",
+  "pinyin": "zhù",
+  "freqRank": 309
+ },
+ {
+  "kai": "告",
+  "pinyin": "gào",
+  "freqRank": 310
+ },
+ {
+  "kai": "类",
+  "pinyin": "lèi",
+  "freqRank": 311
+ },
+ {
+  "kai": "求",
+  "pinyin": "qiú",
+  "freqRank": 312
+ },
+ {
+  "kai": "据",
+  "pinyin": "jù",
+  "freqRank": 313
+ },
+ {
+  "kai": "程",
+  "pinyin": "chéng",
+  "freqRank": 314
+ },
+ {
+  "kai": "北",
+  "pinyin": "běi",
+  "freqRank": 315
+ },
+ {
+  "kai": "边",
+  "pinyin": "biān",
+  "freqRank": 316
+ },
+ {
+  "kai": "死",
+  "pinyin": "sǐ",
+  "freqRank": 317
+ },
+ {
+  "kai": "张",
+  "pinyin": "zhāng",
+  "freqRank": 318
+ },
+ {
+  "kai": "该",
+  "pinyin": "gāi",
+  "freqRank": 319
+ },
+ {
+  "kai": "交",
+  "pinyin": "jiāo",
+  "freqRank": 320
+ },
+ {
+  "kai": "规",
+  "pinyin": "guī",
+  "freqRank": 321
+ },
+ {
+  "kai": "万",
+  "pinyin": "wàn",
+  "freqRank": 322
+ },
+ {
+  "kai": "取",
+  "pinyin": "qǔ",
+  "freqRank": 323
+ },
+ {
+  "kai": "拉",
+  "pinyin": "lā",
+  "freqRank": 324
+ },
+ {
+  "kai": "格",
+  "pinyin": "gé",
+  "freqRank": 325
+ },
+ {
+  "kai": "望",
+  "pinyin": "wàng",
+  "freqRank": 326
+ },
+ {
+  "kai": "觉",
+  "pinyin": "jué",
+  "freqRank": 327
+ },
+ {
+  "kai": "术",
+  "pinyin": "shù",
+  "freqRank": 328
+ },
+ {
+  "kai": "领",
+  "pinyin": "lǐng",
+  "freqRank": 329
+ },
+ {
+  "kai": "共",
+  "pinyin": "gòng",
+  "freqRank": 330
+ },
+ {
+  "kai": "确",
+  "pinyin": "què",
+  "freqRank": 331
+ },
+ {
+  "kai": "传",
+  "pinyin": "chuán",
+  "freqRank": 332
+ },
+ {
+  "kai": "师",
+  "pinyin": "shī",
+  "freqRank": 333
+ },
+ {
+  "kai": "观",
+  "pinyin": "guān",
+  "freqRank": 334
+ },
+ {
+  "kai": "清",
+  "pinyin": "qīng",
+  "freqRank": 335
+ },
+ {
+  "kai": "今",
+  "pinyin": "jīn",
+  "freqRank": 336
+ },
+ {
+  "kai": "切",
+  "pinyin": "qiè",
+  "freqRank": 337
+ },
+ {
+  "kai": "院",
+  "pinyin": "yuàn",
+  "freqRank": 338
+ },
+ {
+  "kai": "让",
+  "pinyin": "ràng",
+  "freqRank": 339
+ },
+ {
+  "kai": "识",
+  "pinyin": "shí",
+  "freqRank": 340
+ },
+ {
+  "kai": "候",
+  "pinyin": "hòu",
+  "freqRank": 341
+ },
+ {
+  "kai": "带",
+  "pinyin": "dài",
+  "freqRank": 342
+ },
+ {
+  "kai": "导",
+  "pinyin": "dǎo",
+  "freqRank": 343
+ },
+ {
+  "kai": "争",
+  "pinyin": "zhēng",
+  "freqRank": 344
+ },
+ {
+  "kai": "运",
+  "pinyin": "yùn",
+  "freqRank": 345
+ },
+ {
+  "kai": "笑",
+  "pinyin": "xiào",
+  "freqRank": 346
+ },
+ {
+  "kai": "飞",
+  "pinyin": "fēi",
+  "freqRank": 347
+ },
+ {
+  "kai": "风",
+  "pinyin": "fēng",
+  "freqRank": 348
+ },
+ {
+  "kai": "步",
+  "pinyin": "bù",
+  "freqRank": 349
+ },
+ {
+  "kai": "改",
+  "pinyin": "gǎi",
+  "freqRank": 350
+ },
+ {
+  "kai": "收",
+  "pinyin": "shōu",
+  "freqRank": 351
+ },
+ {
+  "kai": "根",
+  "pinyin": "gēn",
+  "freqRank": 352
+ },
+ {
+  "kai": "干",
+  "pinyin": "gàn",
+  "freqRank": 353
+ },
+ {
+  "kai": "造",
+  "pinyin": "zào",
+  "freqRank": 354
+ },
+ {
+  "kai": "言",
+  "pinyin": "yán",
+  "freqRank": 355
+ },
+ {
+  "kai": "联",
+  "pinyin": "lián",
+  "freqRank": 356
+ },
+ {
+  "kai": "持",
+  "pinyin": "chí",
+  "freqRank": 357
+ },
+ {
+  "kai": "组",
+  "pinyin": "zǔ",
+  "freqRank": 358
+ },
+ {
+  "kai": "每",
+  "pinyin": "měi",
+  "freqRank": 359
+ },
+ {
+  "kai": "济",
+  "pinyin": "jì",
+  "freqRank": 360
+ },
+ {
+  "kai": "车",
+  "pinyin": "chē",
+  "freqRank": 361
+ },
+ {
+  "kai": "亲",
+  "pinyin": "qīn",
+  "freqRank": 362
+ },
+ {
+  "kai": "极",
+  "pinyin": "jí",
+  "freqRank": 363
+ },
+ {
+  "kai": "林",
+  "pinyin": "lín",
+  "freqRank": 364
+ },
+ {
+  "kai": "服",
+  "pinyin": "fú",
+  "freqRank": 365
+ },
+ {
+  "kai": "快",
+  "pinyin": "kuài",
+  "freqRank": 366
+ },
+ {
+  "kai": "办",
+  "pinyin": "bàn",
+  "freqRank": 367
+ },
+ {
+  "kai": "议",
+  "pinyin": "yì",
+  "freqRank": 368
+ },
+ {
+  "kai": "往",
+  "pinyin": "wǎng",
+  "freqRank": 369
+ },
+ {
+  "kai": "元",
+  "pinyin": "yuán",
+  "freqRank": 370
+ },
+ {
+  "kai": "英",
+  "pinyin": "yīng",
+  "freqRank": 371
+ },
+ {
+  "kai": "士",
+  "pinyin": "shì",
+  "freqRank": 372
+ },
+ {
+  "kai": "证",
+  "pinyin": "zhèng",
+  "freqRank": 373
+ },
+ {
+  "kai": "近",
+  "pinyin": "jìn",
+  "freqRank": 374
+ },
+ {
+  "kai": "失",
+  "pinyin": "shī",
+  "freqRank": 375
+ },
+ {
+  "kai": "转",
+  "pinyin": "zhuǎn",
+  "freqRank": 376
+ },
+ {
+  "kai": "夫",
+  "pinyin": "fū",
+  "freqRank": 377
+ },
+ {
+  "kai": "令",
+  "pinyin": "lìng",
+  "freqRank": 378
+ },
+ {
+  "kai": "准",
+  "pinyin": "zhǔn",
+  "freqRank": 379
+ },
+ {
+  "kai": "布",
+  "pinyin": "bù",
+  "freqRank": 380
+ },
+ {
+  "kai": "始",
+  "pinyin": "shǐ",
+  "freqRank": 381
+ },
+ {
+  "kai": "怎",
+  "pinyin": "zěn",
+  "freqRank": 382
+ },
+ {
+  "kai": "呢",
+  "pinyin": "ne",
+  "freqRank": 383
+ },
+ {
+  "kai": "存",
+  "pinyin": "cún",
+  "freqRank": 384
+ },
+ {
+  "kai": "未",
+  "pinyin": "wèi",
+  "freqRank": 385
+ },
+ {
+  "kai": "远",
+  "pinyin": "yuǎn",
+  "freqRank": 386
+ },
+ {
+  "kai": "叫",
+  "pinyin": "jiào",
+  "freqRank": 387
+ },
+ {
+  "kai": "台",
+  "pinyin": "tái",
+  "freqRank": 388
+ },
+ {
+  "kai": "单",
+  "pinyin": "dān",
+  "freqRank": 389
+ },
+ {
+  "kai": "影",
+  "pinyin": "yǐng",
+  "freqRank": 390
+ },
+ {
+  "kai": "具",
+  "pinyin": "jù",
+  "freqRank": 391
+ },
+ {
+  "kai": "罗",
+  "pinyin": "luó",
+  "freqRank": 392
+ },
+ {
+  "kai": "字",
+  "pinyin": "zì",
+  "freqRank": 393
+ },
+ {
+  "kai": "爱",
+  "pinyin": "ài",
+  "freqRank": 394
+ },
+ {
+  "kai": "击",
+  "pinyin": "jī",
+  "freqRank": 395
+ },
+ {
+  "kai": "流",
+  "pinyin": "liú",
+  "freqRank": 396
+ },
+ {
+  "kai": "备",
+  "pinyin": "bèi",
+  "freqRank": 397
+ },
+ {
+  "kai": "兵",
+  "pinyin": "bīng",
+  "freqRank": 398
+ },
+ {
+  "kai": "连",
+  "pinyin": "lián",
+  "freqRank": 399
+ },
+ {
+  "kai": "调",
+  "pinyin": "diào",
+  "freqRank": 400
+ },
+ {
+  "kai": "深",
+  "pinyin": "shēn",
+  "freqRank": 401
+ },
+ {
+  "kai": "商",
+  "pinyin": "shāng",
+  "freqRank": 402
+ },
+ {
+  "kai": "算",
+  "pinyin": "suàn",
+  "freqRank": 403
+ },
+ {
+  "kai": "质",
+  "pinyin": "zhì",
+  "freqRank": 404
+ },
+ {
+  "kai": "团",
+  "pinyin": "tuán",
+  "freqRank": 405
+ },
+ {
+  "kai": "集",
+  "pinyin": "jí",
+  "freqRank": 406
+ },
+ {
+  "kai": "百",
+  "pinyin": "bǎi",
+  "freqRank": 407
+ },
+ {
+  "kai": "需",
+  "pinyin": "xū",
+  "freqRank": 408
+ },
+ {
+  "kai": "价",
+  "pinyin": "jià",
+  "freqRank": 409
+ },
+ {
+  "kai": "花",
+  "pinyin": "huā",
+  "freqRank": 410
+ },
+ {
+  "kai": "党",
+  "pinyin": "dǎng",
+  "freqRank": 411
+ },
+ {
+  "kai": "华",
+  "pinyin": "huá",
+  "freqRank": 412
+ },
+ {
+  "kai": "城",
+  "pinyin": "chéng",
+  "freqRank": 413
+ },
+ {
+  "kai": "石",
+  "pinyin": "shí",
+  "freqRank": 414
+ },
+ {
+  "kai": "级",
+  "pinyin": "jí",
+  "freqRank": 415
+ },
+ {
+  "kai": "整",
+  "pinyin": "zhěng",
+  "freqRank": 416
+ },
+ {
+  "kai": "府",
+  "pinyin": "fǔ",
+  "freqRank": 417
+ },
+ {
+  "kai": "离",
+  "pinyin": "lí",
+  "freqRank": 418
+ },
+ {
+  "kai": "况",
+  "pinyin": "kuàng",
+  "freqRank": 419
+ },
+ {
+  "kai": "亚",
+  "pinyin": "yà",
+  "freqRank": 420
+ },
+ {
+  "kai": "请",
+  "pinyin": "qǐng",
+  "freqRank": 421
+ },
+ {
+  "kai": "技",
+  "pinyin": "jì",
+  "freqRank": 422
+ },
+ {
+  "kai": "际",
+  "pinyin": "jì",
+  "freqRank": 423
+ },
+ {
+  "kai": "约",
+  "pinyin": "yuē",
+  "freqRank": 424
+ },
+ {
+  "kai": "示",
+  "pinyin": "shì",
+  "freqRank": 425
+ },
+ {
+  "kai": "复",
+  "pinyin": "fù",
+  "freqRank": 426
+ },
+ {
+  "kai": "病",
+  "pinyin": "bìng",
+  "freqRank": 427
+ },
+ {
+  "kai": "息",
+  "pinyin": "xī",
+  "freqRank": 428
+ },
+ {
+  "kai": "究",
+  "pinyin": "jiū",
+  "freqRank": 429
+ },
+ {
+  "kai": "线",
+  "pinyin": "xiàn",
+  "freqRank": 430
+ },
+ {
+  "kai": "似",
+  "pinyin": "shì",
+  "freqRank": 431
+ },
+ {
+  "kai": "官",
+  "pinyin": "guān",
+  "freqRank": 432
+ },
+ {
+  "kai": "火",
+  "pinyin": "huǒ",
+  "freqRank": 433
+ },
+ {
+  "kai": "断",
+  "pinyin": "duàn",
+  "freqRank": 434
+ },
+ {
+  "kai": "精",
+  "pinyin": "jīng",
+  "freqRank": 435
+ },
+ {
+  "kai": "满",
+  "pinyin": "mǎn",
+  "freqRank": 436
+ },
+ {
+  "kai": "支",
+  "pinyin": "zhī",
+  "freqRank": 437
+ },
+ {
+  "kai": "视",
+  "pinyin": "shì",
+  "freqRank": 438
+ },
+ {
+  "kai": "消",
+  "pinyin": "xiāo",
+  "freqRank": 439
+ },
+ {
+  "kai": "越",
+  "pinyin": "yuè",
+  "freqRank": 440
+ },
+ {
+  "kai": "器",
+  "pinyin": "qì",
+  "freqRank": 441
+ },
+ {
+  "kai": "容",
+  "pinyin": "róng",
+  "freqRank": 442
+ },
+ {
+  "kai": "照",
+  "pinyin": "zhào",
+  "freqRank": 443
+ },
+ {
+  "kai": "须",
+  "pinyin": "xū",
+  "freqRank": 444
+ },
+ {
+  "kai": "九",
+  "pinyin": "jiǔ",
+  "freqRank": 445
+ },
+ {
+  "kai": "增",
+  "pinyin": "zēng",
+  "freqRank": 446
+ },
+ {
+  "kai": "研",
+  "pinyin": "yán",
+  "freqRank": 447
+ },
+ {
+  "kai": "写",
+  "pinyin": "xiě",
+  "freqRank": 448
+ },
+ {
+  "kai": "称",
+  "pinyin": "chēng",
+  "freqRank": 449
+ },
+ {
+  "kai": "企",
+  "pinyin": "qǐ",
+  "freqRank": 450
+ },
+ {
+  "kai": "八",
+  "pinyin": "bā",
+  "freqRank": 451
+ },
+ {
+  "kai": "功",
+  "pinyin": "gōng",
+  "freqRank": 452
+ },
+ {
+  "kai": "吗",
+  "pinyin": "ma",
+  "freqRank": 453
+ },
+ {
+  "kai": "包",
+  "pinyin": "bāo",
+  "freqRank": 454
+ },
+ {
+  "kai": "片",
+  "pinyin": "piàn",
+  "freqRank": 455
+ },
+ {
+  "kai": "史",
+  "pinyin": "shǐ",
+  "freqRank": 456
+ },
+ {
+  "kai": "委",
+  "pinyin": "wěi",
+  "freqRank": 457
+ },
+ {
+  "kai": "乎",
+  "pinyin": "hū",
+  "freqRank": 458
+ },
+ {
+  "kai": "查",
+  "pinyin": "chá",
+  "freqRank": 459
+ },
+ {
+  "kai": "轻",
+  "pinyin": "qīng",
+  "freqRank": 460
+ },
+ {
+  "kai": "易",
+  "pinyin": "yì",
+  "freqRank": 461
+ },
+ {
+  "kai": "早",
+  "pinyin": "zǎo",
+  "freqRank": 462
+ },
+ {
+  "kai": "曾",
+  "pinyin": "céng",
+  "freqRank": 463
+ },
+ {
+  "kai": "除",
+  "pinyin": "chú",
+  "freqRank": 464
+ },
+ {
+  "kai": "农",
+  "pinyin": "nóng",
+  "freqRank": 465
+ },
+ {
+  "kai": "找",
+  "pinyin": "zhǎo",
+  "freqRank": 466
+ },
+ {
+  "kai": "装",
+  "pinyin": "zhuāng",
+  "freqRank": 467
+ },
+ {
+  "kai": "广",
+  "pinyin": "guǎng",
+  "freqRank": 468
+ },
+ {
+  "kai": "显",
+  "pinyin": "xiǎn",
+  "freqRank": 469
+ },
+ {
+  "kai": "吧",
+  "pinyin": "ba",
+  "freqRank": 470
+ },
+ {
+  "kai": "阿",
+  "pinyin": "ā",
+  "freqRank": 471
+ },
+ {
+  "kai": "李",
+  "pinyin": "lǐ",
+  "freqRank": 472
+ },
+ {
+  "kai": "标",
+  "pinyin": "biāo",
+  "freqRank": 473
+ },
+ {
+  "kai": "谈",
+  "pinyin": "tán",
+  "freqRank": 474
+ },
+ {
+  "kai": "吃",
+  "pinyin": "chī",
+  "freqRank": 475
+ },
+ {
+  "kai": "图",
+  "pinyin": "tú",
+  "freqRank": 476
+ },
+ {
+  "kai": "念",
+  "pinyin": "niàn",
+  "freqRank": 477
+ },
+ {
+  "kai": "六",
+  "pinyin": "liù",
+  "freqRank": 478
+ },
+ {
+  "kai": "引",
+  "pinyin": "yǐn",
+  "freqRank": 479
+ },
+ {
+  "kai": "历",
+  "pinyin": "lì",
+  "freqRank": 480
+ },
+ {
+  "kai": "首",
+  "pinyin": "shǒu",
+  "freqRank": 481
+ },
+ {
+  "kai": "医",
+  "pinyin": "yī",
+  "freqRank": 482
+ },
+ {
+  "kai": "局",
+  "pinyin": "jú",
+  "freqRank": 483
+ },
+ {
+  "kai": "突",
+  "pinyin": "tū",
+  "freqRank": 484
+ },
+ {
+  "kai": "专",
+  "pinyin": "zhuān",
+  "freqRank": 485
+ },
+ {
+  "kai": "费",
+  "pinyin": "fèi",
+  "freqRank": 486
+ },
+ {
+  "kai": "号",
+  "pinyin": "hào",
+  "freqRank": 487
+ },
+ {
+  "kai": "尽",
+  "pinyin": "jǐn",
+  "freqRank": 488
+ },
+ {
+  "kai": "另",
+  "pinyin": "lìng",
+  "freqRank": 489
+ },
+ {
+  "kai": "周",
+  "pinyin": "zhōu",
+  "freqRank": 490
+ },
+ {
+  "kai": "较",
+  "pinyin": "jiào",
+  "freqRank": 491
+ },
+ {
+  "kai": "注",
+  "pinyin": "zhù",
+  "freqRank": 492
+ },
+ {
+  "kai": "语",
+  "pinyin": "yǔ",
+  "freqRank": 493
+ },
+ {
+  "kai": "仅",
+  "pinyin": "jǐn",
+  "freqRank": 494
+ },
+ {
+  "kai": "考",
+  "pinyin": "kǎo",
+  "freqRank": 495
+ },
+ {
+  "kai": "落",
+  "pinyin": "luò",
+  "freqRank": 496
+ },
+ {
+  "kai": "青",
+  "pinyin": "qīng",
+  "freqRank": 497
+ },
+ {
+  "kai": "随",
+  "pinyin": "suí",
+  "freqRank": 498
+ },
+ {
+  "kai": "选",
+  "pinyin": "xuǎn",
+  "freqRank": 499
+ },
+ {
+  "kai": "列",
+  "pinyin": "liè",
+  "freqRank": 500
+ }
+]

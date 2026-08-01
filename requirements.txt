@@ -1,0 +1,4 @@
+flask
+fsrs
+requests
+pillow
