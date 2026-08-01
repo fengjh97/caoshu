@@ -32,18 +32,19 @@ SHUFA_BASE = "https://www.shufazidian.com"
 ALLOWED_IMG_HOSTS = ("shufazidian.com", "9610.com", "sfzd.cn")
 MAX_CALLIG_IMAGES = 12
 
-app = Flask(__name__, static_folder="static", static_url_path="/static")
+app = Flask(__name__, static_folder="static", static_url_path="")
 scheduler = Scheduler()
 _db_lock = threading.Lock()
 
 # ---------------------------------------------------------------- 内容（静态 JSON）
 
-with open(DATA / "hanzi_freq.json", encoding="utf-8") as f:
-    FREQ_TABLE = json.load(f)  # [{kai, pinyin, freqRank}]
+with open(DATA / "chars.json", encoding="utf-8") as f:
+    FREQ_TABLE = json.load(f)  # [{kai, pinyin, freqRank, core}] 3000 字库
 with open(DATA / "decompositions.json", encoding="utf-8") as f:
     DECOMPOSITIONS = {d["kai"]: d for d in json.load(f)}
 HANZI_BY_KAI = {h["kai"]: h for h in FREQ_TABLE}
-ALL_KAI = [h["kai"] for h in FREQ_TABLE]
+CORE_TABLE = [h for h in FREQ_TABLE if h.get("core")]  # 1000 学习字
+CORE_KAI = {h["kai"] for h in CORE_TABLE}
 
 # ---------------------------------------------------------------- 配置
 
@@ -103,14 +104,16 @@ def init_db() -> None:
             CREATE INDEX IF NOT EXISTS idx_log_time ON review_log(reviewed_at);
             """
         )
-        # 首次启动 seed：每字两张卡（认字 + 书写），幂等。
-        (count,) = conn.execute("SELECT COUNT(*) FROM cards").fetchone()
-        if count == 0:
-            rows = []
-            for h in FREQ_TABLE:
-                rows.append((h["kai"], "recognize"))
-                rows.append((h["kai"], "produce"))
-            conn.executemany("INSERT INTO cards(kai, direction) VALUES(?,?)", rows)
+        # 学习集 seed：每字两张卡（认字 + 书写）。增量幂等——
+        # 字表扩容时补插新字，已有卡与进度原样保留。
+        conn.execute(
+            "CREATE UNIQUE INDEX IF NOT EXISTS idx_cards_kd ON cards(kai, direction)"
+        )
+        rows = []
+        for h in CORE_TABLE:
+            rows.append((h["kai"], "recognize"))
+            rows.append((h["kai"], "produce"))
+        conn.executemany("INSERT OR IGNORE INTO cards(kai, direction) VALUES(?,?)", rows)
 
 
 # ---------------------------------------------------------------- FSRS 辅助
@@ -143,6 +146,10 @@ def card_json(row, pinyin=True) -> dict:
 def build_queue(conn, cfg) -> dict:
     now = now_utc()
     today = now.astimezone().strftime("%Y-%m-%d")
+    day_start_utc = (
+        now.astimezone().replace(hour=0, minute=0, second=0, microsecond=0)
+        .astimezone(timezone.utc).isoformat()
+    )
 
     reviews = conn.execute(
         "SELECT * FROM cards WHERE reps > 0 AND due <= ? ORDER BY due ASC",
@@ -151,18 +158,21 @@ def build_queue(conn, cfg) -> dict:
 
     introduced_today = conn.execute(
         "SELECT COUNT(*) FROM cards WHERE first_review IS NOT NULL AND first_review >= ?",
-        ((now.astimezone().replace(hour=0, minute=0, second=0, microsecond=0))
-         .astimezone(timezone.utc).isoformat(),),
+        (day_start_utc,),
     ).fetchone()[0]
     allowance = max(0, int(cfg["daily_new_limit"]) - introduced_today)
 
     new_cards = []
     if allowance:
-        # seed 按字频序插入，id 序即字频序。
-        new_cards = conn.execute(
-            "SELECT * FROM cards WHERE reps = 0 ORDER BY id ASC LIMIT ?",
-            (allowance,),
-        ).fetchall()
+        # 新卡只出学习字表（core），按当前字库的字频序。
+        candidates = conn.execute("SELECT * FROM cards WHERE reps = 0").fetchall()
+        candidates = [r for r in candidates if r["kai"] in CORE_KAI]
+        candidates.sort(key=lambda r: (HANZI_BY_KAI[r["kai"]]["freqRank"], r["direction"]))
+        new_cards = candidates[:allowance]
+
+    done_today = conn.execute(
+        "SELECT COUNT(*) FROM review_log WHERE reviewed_at >= ?", (day_start_utc,)
+    ).fetchone()[0]
 
     queue = [card_json(r) for r in reviews] + [card_json(r) for r in new_cards]
     return {
@@ -170,6 +180,7 @@ def build_queue(conn, cfg) -> dict:
         "queue": queue,
         "newCount": len(new_cards),
         "reviewCount": len(reviews),
+        "doneToday": done_today,
         "streak": compute_streak(conn),
     }
 
@@ -266,30 +277,37 @@ def api_grade():
 def api_chars():
     with _db_lock, db() as conn:
         rows = conn.execute(
-            "SELECT kai, MIN(reps) AS min_reps, MAX(state) AS max_state FROM cards GROUP BY kai"
+            "SELECT kai, MAX(reps) AS max_reps FROM cards GROUP BY kai"
         ).fetchall()
-    status = {r["kai"]: {"started": r["min_reps"] > 0 or r["max_state"] > 0} for r in rows}
-    out = []
-    for h in FREQ_TABLE:
-        out.append({**h, "started": status.get(h["kai"], {}).get("started", False)})
+    started = {r["kai"] for r in rows if r["max_reps"] > 0}
+    out = [
+        {**h, "started": h["kai"] in started, "hasDecomp": h["kai"] in DECOMPOSITIONS}
+        for h in FREQ_TABLE
+    ]
     return jsonify(out)
 
 
 @app.get("/api/decomposition/<kai>")
 def api_decomposition(kai):
+    h = HANZI_BY_KAI.get(kai)
+    if h is None:
+        return jsonify({"error": "not found"}), 404
     d = DECOMPOSITIONS.get(kai)
     if d is None:
-        return jsonify({"error": "not found"}), 404
-    h = HANZI_BY_KAI.get(kai, {})
+        # 字库内但暂无拆解详解：给基础信息，前端显示占位并保留真迹。
+        return jsonify(
+            {"kai": kai, "pinyin": h.get("pinyin", ""), "symbols": [],
+             "evolution": "", "confusable": [], "missing": True}
+        )
     return jsonify({**d, "pinyin": h.get("pinyin", "")})
 
 
 @app.get("/api/options/<kai>")
 def api_options(kai):
-    """认字 4 选 1 选项（含正确答案，已打乱）。"""
+    """认字 4 选 1 选项（含正确答案，已打乱）。干扰项取学习字表。"""
     import random
 
-    pool = [k for k in ALL_KAI if k != kai]
+    pool = [k for k in CORE_KAI if k != kai]
     options = random.sample(pool, 3) + [kai]
     random.shuffle(options)
     return jsonify(options)
