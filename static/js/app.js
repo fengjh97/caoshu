@@ -51,7 +51,11 @@ function miSVG() {
     </g></svg>`;
 }
 
-/* ================= 手写板 ================= */
+/* ================= 手写板（墨韵版） =================
+   真毛笔的物理感：起笔积墨、慢笔粗润、快笔飞白、
+   收笔与驻笔处墨向纸面晕开（rAF 渐染）、疾书时甩出细小墨点。 */
+
+const INK_RGB = "26, 23, 19";
 
 class WritingPad {
   constructor(canvas) {
@@ -60,6 +64,8 @@ class WritingPad {
     this.hasStrokes = false;
     this.last = null;
     this.lastWidth = 7;
+    this.bleeds = [];   // 晕染点 {x, y, r0, r1, born}
+    this.raf = null;
     const dpr = window.devicePixelRatio || 1;
     const rect = canvas.getBoundingClientRect();
     canvas.width = rect.width * dpr;
@@ -67,11 +73,10 @@ class WritingPad {
     this.ctx.scale(dpr, dpr);
     this.ctx.lineCap = "round";
     this.ctx.lineJoin = "round";
-    this.ctx.strokeStyle = "#1a1713";
     canvas.addEventListener("pointerdown", (e) => this.down(e));
     canvas.addEventListener("pointermove", (e) => this.move(e));
-    canvas.addEventListener("pointerup", () => (this.last = null));
-    canvas.addEventListener("pointercancel", () => (this.last = null));
+    canvas.addEventListener("pointerup", (e) => this.up(e));
+    canvas.addEventListener("pointercancel", (e) => this.up(e));
   }
   pos(e) {
     const r = this.canvas.getBoundingClientRect();
@@ -83,29 +88,88 @@ class WritingPad {
     this.last = this.pos(e);
     this.lastWidth = 7;
     this.hasStrokes = true;
-    this.ctx.beginPath();
-    this.ctx.arc(this.last.x, this.last.y, 3, 0, Math.PI * 2);
-    this.ctx.fillStyle = "#1a1713";
-    this.ctx.fill();
+    // 起笔积墨：实点 + 一圈缓慢晕开。
+    this.dot(this.last.x, this.last.y, 3.2, 0.95);
+    this.bleed(this.last.x, this.last.y, 4, 9);
   }
   move(e) {
     if (!this.last) return;
     e.preventDefault();
     const p = this.pos(e);
-    const v = Math.hypot(p.x - this.last.x, p.y - this.last.y) / Math.max(1, p.t - this.last.t);
-    const target = Math.max(2.2, Math.min(9, 9 - v * 5));
-    const w = this.lastWidth * 0.7 + target * 0.3;
+    const dist = Math.hypot(p.x - this.last.x, p.y - this.last.y);
+    const v = dist / Math.max(1, p.t - this.last.t);
+    const target = Math.max(2.2, Math.min(9.5, 9.5 - v * 5));
+    const w = this.lastWidth * 0.72 + target * 0.28;
+    const fast = v > 2.1;
+
+    // 边缘晕染晕圈：先铺一层更宽的极淡墨。
+    this.ctx.globalAlpha = 0.07;
+    this.ctx.strokeStyle = `rgb(${INK_RGB})`;
+    this.ctx.lineWidth = w * 2.1;
+    this.seg(this.last, p);
+
+    // 笔芯：快笔降透明度出飞白。
+    this.ctx.globalAlpha = fast ? 0.55 : 0.92;
     this.ctx.lineWidth = w;
-    this.ctx.beginPath();
-    this.ctx.moveTo(this.last.x, this.last.y);
-    this.ctx.lineTo(p.x, p.y);
-    this.ctx.stroke();
+    this.seg(this.last, p);
+    this.ctx.globalAlpha = 1;
+
+    // 疾书甩墨：速度高时向笔势两侧甩出细小墨点。
+    if (v > 2.6 && Math.random() < 0.5) {
+      const ang = Math.atan2(p.y - this.last.y, p.x - this.last.x) + (Math.random() < 0.5 ? 1 : -1) * (Math.PI / 2);
+      const d = 5 + Math.random() * 13;
+      this.dot(p.x + Math.cos(ang) * d, p.y + Math.sin(ang) * d, 0.6 + Math.random() * 1.3, 0.35 + Math.random() * 0.3);
+    }
+    // 驻笔积墨：几乎停住时墨继续洇。
+    if (v < 0.12 && dist > 0) this.bleed(p.x, p.y, w * 0.5, w * 1.05);
+
     this.last = p;
     this.lastWidth = w;
+  }
+  up() {
+    if (this.last) this.bleed(this.last.x, this.last.y, this.lastWidth * 0.45, this.lastWidth * 1.15);
+    this.last = null;
+  }
+  seg(a, b) {
+    this.ctx.beginPath();
+    this.ctx.moveTo(a.x, a.y);
+    this.ctx.lineTo(b.x, b.y);
+    this.ctx.stroke();
+  }
+  dot(x, y, r, a) {
+    this.ctx.globalAlpha = a;
+    this.ctx.fillStyle = `rgb(${INK_RGB})`;
+    this.ctx.beginPath();
+    this.ctx.arc(x, y, r, 0, Math.PI * 2);
+    this.ctx.fill();
+    this.ctx.globalAlpha = 1;
+  }
+  /* 墨晕：350ms 内从 r0 洇到 r1，每帧叠极淡圆，累积成柔和的浸润边。 */
+  bleed(x, y, r0, r1) {
+    this.bleeds.push({ x, y, r0, r1, born: performance.now() });
+    if (!this.raf) this.raf = requestAnimationFrame(() => this.bleedTick());
+  }
+  bleedTick() {
+    this.raf = null;
+    const now = performance.now();
+    for (let i = this.bleeds.length - 1; i >= 0; i--) {
+      const b = this.bleeds[i];
+      const p = (now - b.born) / 350;
+      if (p >= 1) { this.bleeds.splice(i, 1); continue; }
+      const r = b.r0 + (b.r1 - b.r0) * p;
+      this.ctx.globalAlpha = 0.028 * (1 - p);
+      this.ctx.fillStyle = `rgb(${INK_RGB})`;
+      this.ctx.beginPath();
+      this.ctx.arc(b.x, b.y, r, 0, Math.PI * 2);
+      this.ctx.fill();
+      this.ctx.globalAlpha = 1;
+    }
+    if (this.bleeds.length) this.raf = requestAnimationFrame(() => this.bleedTick());
   }
   clear() {
     const r = this.canvas.getBoundingClientRect();
     this.ctx.clearRect(0, 0, r.width, r.height);
+    this.bleeds.length = 0;
     this.hasStrokes = false;
   }
   exportPNG() {
@@ -203,6 +267,7 @@ function startSession(queue) {
   session.queue = queue.slice();
   session.idx = 0;
   session.done = 0;
+  session.combo = 0;
   document.body.classList.add("night");
   const st = $("#study");
   st.classList.remove("hidden", "closing");
@@ -308,6 +373,19 @@ function renderProduceResult(card) {
     </div>
     <div class="rating-row">${ratingHTML(j.suggestedRating)}</div>`);
   if (!selfMode) countUp($("#score-big"), j.score, 800);
+  // 盖章落定的瞬间：过 → 朱砂爆墨 + 脆响；不过 → 闷响。
+  setTimeout(() => {
+    const seal = $("#study-stage .seal-stamp");
+    if (!seal) return;
+    const r = seal.getBoundingClientRect();
+    if (!selfMode && j.verdict === "pass") {
+      FX.splatter(r.left + r.width / 2, r.top + r.height / 2, { n: 30, power: 8, cinnabar: true });
+      FX.sound.pop();
+      FX.buzz(12);
+    } else if (!selfMode) {
+      FX.sound.thud();
+    }
+  }, 300);
   bindRating(card);
 }
 
@@ -316,22 +394,52 @@ function renderProduceResult(card) {
 async function renderRecognize(card) {
   const options = await Engine.options(card.kai);
   stageHTML(`
-    <div class="prompt"><div class="tag">認字</div></div>
+    <div class="prompt"><div class="tag">認字 · 划过正确的字，斩</div></div>
     <div class="cursive-hero glyph-ink">${card.kai}</div>
     <div class="option-grid">
       ${options.map((o, i) => `<button class="option-btn" style="--i:${i}" data-k="${o}">${o}</button>`).join("")}
     </div>`);
-  $$("#study-stage .option-btn").forEach((btn) =>
-    btn.addEventListener("click", () => {
-      const correct = btn.dataset.k === card.kai;
-      $$("#study-stage .option-btn").forEach((b) => {
-        b.disabled = true;
-        if (b.dataset.k === card.kai) b.classList.add("correct");
-        else if (b === btn) b.classList.add("wrong");
-      });
-      setTimeout(() => renderRecognizeResult(card, correct), correct ? 500 : 900);
-    })
-  );
+  wireOptions({
+    root: $("#study-stage .stage-step"),
+    buttons: $$("#study-stage .option-btn"),
+    correctKai: card.kai,
+    comboHost: session,
+    onDone: (correct) =>
+      setTimeout(() => renderRecognizeResult(card, correct), correct ? 620 : 950),
+  });
+}
+
+/* 选项作答：点选或划斩皆可。斩对 → 劈开+溅墨+连斬；答错 → 震屏+闷响。 */
+function wireOptions({ root, buttons, correctKai, comboHost, onDone }) {
+  let resolved = false;
+  const resolve = (btn, sliced) => {
+    if (resolved || btn.disabled) return;
+    resolved = true;
+    const correct = btn.dataset.k === correctKai;
+    const r = btn.getBoundingClientRect();
+    const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    buttons.forEach((b) => { b.disabled = true; if (b !== btn) b.classList.add("dim"); });
+    if (correct) {
+      comboHost.combo = (comboHost.combo || 0) + 1;
+      if (sliced) FX.sliceElement(btn, true);
+      else { btn.classList.add("correct"); FX.splatter(cx, cy, { n: 20, power: 6, cinnabar: true }); }
+      FX.sound.pop();
+      FX.buzz(12);
+      if (comboHost.combo >= 2) FX.comboPop(cx, cy - 46, comboHost.combo);
+    } else {
+      comboHost.combo = 0;
+      btn.classList.add("wrong");
+      buttons.forEach((b) => { if (b.dataset.k === correctKai) { b.classList.remove("dim"); b.classList.add("correct"); } });
+      FX.splatter(cx, cy, { n: 14, power: 4 });
+      FX.sound.thud();
+      FX.buzz([30, 40, 30]);
+      root.classList.add("shake");
+      setTimeout(() => root.classList.remove("shake"), 420);
+    }
+    onDone(correct);
+  };
+  buttons.forEach((btn) => btn.addEventListener("click", () => resolve(btn, false)));
+  FX.slashable(root, ".option-btn", (btn) => resolve(btn, true));
 }
 
 function renderRecognizeResult(card, correct) {
@@ -398,30 +506,30 @@ async function startQuiz() {
   const target = pool[Math.floor(Math.random() * pool.length)];
   const options = await Engine.options(target.kai);
   $("#quiz-body").innerHTML = `
-    <div class="card" style="background:var(--paper-hi)">
-      <div class="cursive-hero glyph-ink" style="color:var(--ink)">${target.kai}</div>
-    </div>
-    <div class="option-grid">
-      ${options.map((o, i) =>
-        `<button class="option-btn" style="--i:${i};background:var(--paper-hi);color:var(--ink);border-color:var(--paper-edge)" data-k="${o}">${o}</button>`
-      ).join("")}
+    <div class="quiz-round">
+      <div class="card" style="background:var(--paper-hi)">
+        <div class="cursive-hero glyph-ink" style="color:var(--ink)">${target.kai}</div>
+      </div>
+      <div class="option-grid">
+        ${options.map((o, i) =>
+          `<button class="option-btn paper-opt" style="--i:${i}" data-k="${o}">${o}</button>`
+        ).join("")}
+      </div>
     </div>`;
-  $$("#quiz-body .option-btn").forEach((btn) =>
-    btn.addEventListener("click", () => {
-      const correct = btn.dataset.k === target.kai;
+  wireOptions({
+    root: $("#quiz-body .quiz-round"),
+    buttons: $$("#quiz-body .option-btn"),
+    correctKai: target.kai,
+    comboHost: quiz,
+    onDone: (correct) => {
       quiz.total += 1;
       if (correct) quiz.right += 1;
       const tally = $("#quiz-tally");
       tally.classList.remove("hidden");
-      tally.textContent = `${quiz.right} / ${quiz.total}`;
-      $$("#quiz-body .option-btn").forEach((b) => {
-        b.disabled = true;
-        if (b.dataset.k === target.kai) b.classList.add("correct");
-        else if (b === btn) b.classList.add("wrong");
-      });
-      setTimeout(startQuiz, correct ? 620 : 1400);
-    })
-  );
+      tally.textContent = `${quiz.right} / ${quiz.total}${quiz.combo >= 2 ? ` · 連斬 ×${quiz.combo}` : ""}`;
+      setTimeout(startQuiz, correct ? 700 : 1400);
+    },
+  });
 }
 
 /* ================= 拆解 ================= */
@@ -581,6 +689,10 @@ async function renderSettings() {
           <button class="stepper-btn" id="lim-p">＋</button>
         </span>
       </div>
+      <div class="set-row">
+        <span>斩字音效</span>
+        <button class="toggle ${localStorage.getItem("caoshu.sound") !== "off" ? "on" : ""}" id="snd-toggle" aria-label="音效开关"><span class="knob"></span></button>
+      </div>
     </div>
     ${STATIC_MODE ? `
     <div class="card reveal" style="--i:1">
@@ -612,6 +724,12 @@ async function renderSettings() {
     </div>`;
   $("#lim-m").addEventListener("click", () => bumpLimit(-1));
   $("#lim-p").addEventListener("click", () => bumpLimit(1));
+  $("#snd-toggle").addEventListener("click", () => {
+    const off = localStorage.getItem("caoshu.sound") === "off";
+    localStorage.setItem("caoshu.sound", off ? "on" : "off");
+    $("#snd-toggle").classList.toggle("on", off);
+    if (off) FX.sound.pop();
+  });
   if (STATIC_MODE) {
     $("#btn-export").addEventListener("click", () => {
       const blob = new Blob([Engine.exportData()], { type: "application/json" });

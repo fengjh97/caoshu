@@ -503,6 +503,71 @@ body.night #dock { transform: translateX(-50%) translateY(140%); opacity: 0; poi
 .dock-item.active { color: var(--cinnabar); }
 .dock-item.active .dock-glyph { background: var(--cinnabar); color: var(--paper-hi); transform: translateY(-2px); box-shadow: 0 5px 12px rgba(156,42,20,0.4); }
 
+/* ==================== 墨戏（游戏化特效） ==================== */
+
+.fx-canvas {
+  position: fixed; inset: 0; z-index: 80;
+  pointer-events: none; width: 100vw; height: 100dvh;
+}
+
+/* 划斩时选项区禁止滚动抢手势 */
+.option-grid { touch-action: none; }
+
+/* 斩开的两半：向两侧翻飞坠落 */
+.slice-half {
+  pointer-events: none; z-index: 70;
+  animation: slice-fly 0.7s cubic-bezier(0.3, 0.1, 0.7, 1) both;
+}
+@keyframes slice-fly {
+  0%   { transform: translate(0, 0) rotate(0); opacity: 1; }
+  100% { transform: translate(var(--fly-x, 30px), 90px) rotate(var(--fly-r, 10deg)); opacity: 0; }
+}
+
+/* 连斬弹章 */
+.combo-pop {
+  position: fixed; z-index: 85; pointer-events: none;
+  transform: translate(-50%, -50%);
+  font-family: var(--kaiti); font-size: 22px; font-weight: 700; letter-spacing: 0.14em;
+  color: var(--cinnabar);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+  border: 2.2px solid var(--cinnabar); border-radius: 8px; padding: 5px 13px;
+  background: rgba(251, 247, 236, 0.9);
+  animation: combo-pop 0.9s var(--ease-spring) both;
+}
+@keyframes combo-pop {
+  0%   { transform: translate(-50%, -50%) scale(0.3) rotate(-12deg); opacity: 0; }
+  22%  { transform: translate(-50%, -50%) scale(1.15) rotate(-5deg); opacity: 1; }
+  60%  { transform: translate(-50%, -62%) scale(1) rotate(-5deg); opacity: 1; }
+  100% { transform: translate(-50%, -110%) scale(0.95) rotate(-4deg); opacity: 0; }
+}
+
+/* 答错震屏 */
+.shake { animation: quake 0.42s ease both !important; }
+@keyframes quake {
+  15% { transform: translateX(-9px); } 30% { transform: translateX(8px); }
+  45% { transform: translateX(-6px); } 60% { transform: translateX(4px); }
+  75% { transform: translateX(-2px); }
+}
+
+.option-btn.dim { opacity: 0.3; transition: opacity 0.25s; }
+.option-btn.paper-opt { background: var(--paper-hi); color: var(--ink); border-color: var(--paper-edge); }
+.option-btn.paper-opt.correct { border-color: var(--cinnabar); color: var(--cinnabar); background: var(--cinnabar-soft); }
+
+/* 开关 */
+.toggle {
+  width: 52px; height: 30px; border-radius: 99px; cursor: pointer;
+  border: 1.4px solid var(--paper-edge); background: var(--paper-lo);
+  position: relative; transition: background 0.25s;
+}
+.toggle .knob {
+  position: absolute; top: 2px; left: 2px; width: 23px; height: 23px;
+  border-radius: 50%; background: var(--paper-hi);
+  box-shadow: 0 2px 5px rgba(26, 23, 19, 0.25);
+  transition: transform 0.25s var(--ease-spring);
+}
+.toggle.on { background: var(--cinnabar); border-color: var(--cinnabar); }
+.toggle.on .knob { transform: translateX(21px); }
+
 /* ==================== 桌面适配 ==================== */
 
 @media (min-width: 700px) {
