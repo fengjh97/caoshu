@@ -60,7 +60,10 @@ def fetch(kai: str) -> list[str]:
 
 def main() -> None:
     chars = json.loads((BASE / "data" / "chars.json").read_text("utf-8"))
-    core = [c["kai"] for c in chars if c["core"]]
+    # 學習字表優先，詩字擴展跟後
+    core = [c["kai"] for c in chars if c["core"]] + [
+        c["kai"] for c in chars if c.get("poem")
+    ]
     done = ok = fail = streak_fail = 0
     for kai in core:
         path = OUT / (f"{ord(kai)}.json")
@@ -72,14 +75,17 @@ def main() -> None:
             path.write_text(json.dumps(urls, ensure_ascii=False), encoding="utf-8")
             ok += 1
             streak_fail = 0
+            time.sleep(4 + random.random() * 2)
         except requests.RequestException as e:
             fail += 1
             streak_fail += 1
             print(f"fail {kai}: {e}", file=sys.stderr)
-            if streak_fail >= 10:
-                print("连续失败 10 次，疑似被限流，停止。稍后再跑（幂等续传）。")
+            # 站點對高頻字（大結果集）常態性 500，並非只有封禁一種原因，
+            # 熔斷放寬到 25 連敗；失敗後多歇一會。
+            if streak_fail >= 25:
+                print("连续失败 25 次，疑似被限流，停止。稍后再跑（幂等续传）。")
                 break
-        time.sleep(4 + random.random() * 2)
+            time.sleep(8 + random.random() * 4)
         if (ok + fail) % 50 == 0 and (ok + fail):
             print(f"progress: skip {done} ok {ok} fail {fail}", flush=True)
     print(f"done: skip {done} ok {ok} fail {fail}")

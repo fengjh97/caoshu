@@ -10,8 +10,9 @@ const ok = (name, cond) => out.push((cond ? "OK " : "FAIL ") + name);
   try {
     localStorage.clear();
     await Engine.init();
-    ok("init: 3000 chars", Engine.lib.length === 3000);
+    ok("init: 3574 chars (3000 + poem ext)", Engine.lib.length === 3574);
     ok("tc field present", Engine.lib.some(c => c.tc && c.tc !== c.kai));
+    ok("poem-ext chars present", Engine.lib.filter(c => c.poem).length >= 570);
     const s0 = await Engine.state();
     ok("fresh state: empty queue", s0.queue.length === 0 && s0.reviewCount === 0);
     ok("isStarted false", !Engine.isStarted("云"));

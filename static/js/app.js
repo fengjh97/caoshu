@@ -73,14 +73,18 @@ async function loadChars() {
     store.chars = await Engine.chars();
     store.byKai = new Map(store.chars.map((c) => [c.kai, c]));
     store.byTC = new Map();
-    store.chars.forEach((c) => { if (c.tc && !store.byTC.has(c.tc)) store.byTC.set(c.tc, c); });
+    store.bySC = new Map();
+    store.chars.forEach((c) => {
+      if (c.tc && !store.byTC.has(c.tc)) store.byTC.set(c.tc, c);
+      if (c.sc && !store.bySC.has(c.sc)) store.bySC.set(c.sc, c);
+    });
   }
   return store.chars;
 }
 
 /* 任意漢字（繁或簡）→ 字庫條目；查不到 = 暫缺。 */
 function mapChar(ch) {
-  return store.byKai.get(ch) || store.byTC.get(ch) || null;
+  return store.byKai.get(ch) || store.byTC.get(ch) || store.bySC.get(ch) || null;
 }
 
 function tcOf(kai) {
@@ -765,7 +769,8 @@ async function initDecomp() {
     const q = $("#decomp-search").value.trim().toLowerCase();
     let list = decompFilter === "core" ? chars.filter((c) => c.core) : chars;
     if (q) list = list.filter((c) =>
-      c.kai.includes(q) || (c.tc || "").includes(q) || (c.pinyin || "").toLowerCase().includes(q)
+      c.kai.includes(q) || (c.tc || "").includes(q) || (c.sc || "").includes(q)
+        || (c.pinyin || "").toLowerCase().includes(q)
     );
     renderGrid(list);
   };
