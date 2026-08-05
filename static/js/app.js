@@ -942,6 +942,7 @@ async function renderSettings() {
       <div class="sec-label">關於</div>
       <p class="fine-print">學書 —— 在每日書寫中學會草書<br>
       每日一句 · 唐詩三百首 · 三千字庫 · FSRS 間隔重複<br>
+      刊頭「學」王羲之《學書帖》 · 「書」歐陽詢《卜商帖》<br>
       字體 霞鶩文楷 TC / 鍾齊流江毛草（皆開源）· 真跡 書法字典</p>
     </div>`;
   $("#lim-m").addEventListener("click", () => bumpLimit(-1));

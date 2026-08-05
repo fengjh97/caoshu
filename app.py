@@ -505,7 +505,7 @@ def api_calligraphy(kai):
             # 站点真实接口：POST s.php，sort=8 = 只搜草书。
             resp = requests.post(
                 f"{SHUFA_BASE}/s.php",
-                data={"wd": kai, "sort": "8"},
+                data={"wd": kai, "sort": "7"},  # 7=草書（8 是行書，歷史誤用）
                 headers={"User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)"},
                 timeout=20,
             )

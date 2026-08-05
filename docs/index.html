@@ -30,13 +30,13 @@
 
 <div id="app">
 
-  <!-- ================= 今日 ================= -->
-  <main id="view-today" class="view">
-    <div class="home-grid">
-      <div class="home-main">
-        <p class="date-line reveal" style="--i:0"><span id="home-date">…</span><span id="home-streak" class="streak-chip hidden">連 0 天</span></p>
+  <!-- ================= 今日（單屏不滾動） ================= -->
+  <main id="view-today" class="view view-home">
+    <p class="date-line reveal" style="--i:0"><span id="home-date">…</span><span id="home-streak" class="streak-chip hidden">連 0 天</span></p>
 
-        <div class="ring-block reveal" style="--i:1">
+    <div class="home-top">
+      <div class="home-main reveal" style="--i:1">
+        <div class="ring-block">
           <svg class="ring" viewBox="0 0 200 200">
             <circle class="ring-track" cx="100" cy="100" r="86"/>
             <circle id="ring-fill" class="ring-fill" cx="100" cy="100" r="86"/>
@@ -46,8 +46,7 @@
             <div id="ring-sub" class="ring-sub">今日待練</div>
           </div>
         </div>
-
-        <div class="stat-chips reveal" style="--i:2">
+        <div class="stat-chips">
           <span class="chip"><b id="chip-new">0</b> 新學</span>
           <span class="chip-sep">·</span>
           <span class="chip"><b id="chip-review">0</b> 複習</span>
@@ -55,18 +54,24 @@
       </div>
 
       <div class="v-title-col" aria-hidden="true">
-        <div class="v-title brush-reveal">學書</div>
+        <!-- 「學」王羲之《學書帖》 · 「書」歐陽詢《卜商帖》 -->
+        <div class="v-title brush-reveal">
+          <img class="vt-glyph vt-xue" src="img/title-xue.png" alt="學">
+          <img class="vt-glyph vt-shu" src="img/title-shu.png" alt="書">
+        </div>
         <div class="v-seal">入墨</div>
       </div>
     </div>
 
     <!-- 今日文句：自寫短句 / 唐詩選句 -->
-    <section id="daily-block" class="reveal" style="--i:3"></section>
+    <section id="daily-block" class="reveal" style="--i:2"></section>
 
-    <button id="btn-start" class="btn-primary reveal" style="--i:4" disabled>
-      <span class="btn-ink-word">入墨</span><span class="btn-rest">開始練習</span>
-    </button>
-    <p id="home-note" class="mode-note reveal" style="--i:5"></p>
+    <div class="home-foot reveal" style="--i:3">
+      <button id="btn-start" class="btn-primary" disabled>
+        <span class="btn-ink-word">入墨</span><span class="btn-rest">開始練習</span>
+      </button>
+      <p id="home-note" class="mode-note"></p>
+    </div>
   </main>
 
   <!-- ================= 複習 ================= -->

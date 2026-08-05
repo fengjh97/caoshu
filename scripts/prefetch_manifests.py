@@ -39,9 +39,10 @@ def allowed(url: str) -> bool:
 
 
 def fetch(kai: str) -> list[str]:
+    # sort 碼實測：7=草書 8=行書 9=楷書（歷史版本誤用 8，抓成了行書）
     resp = requests.post(
         "https://www.shufazidian.com/s.php",
-        data={"wd": kai, "sort": "8"},
+        data={"wd": kai, "sort": "7"},
         headers={"User-Agent": UA},
         timeout=20,
     )
