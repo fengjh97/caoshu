@@ -37,6 +37,7 @@ def main() -> None:
     data.mkdir()
     shutil.copy(BASE / "data" / "chars.json", data / "chars.json")
     shutil.copy(BASE / "data" / "decompositions.json", data / "decompositions.json")
+    shutil.copy(BASE / "data" / "poems.json", data / "poems.json")
 
     calli_src = DATA / "calligraphy"
     calli_dst = data / "calligraphy"

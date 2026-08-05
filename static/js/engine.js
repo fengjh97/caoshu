@@ -78,7 +78,7 @@ class LocalEngine {
     const h = this.lib.find((c) => c.kai === kai) || { pinyin: "", freqRank: 0 };
     const st = this.cards[id] || {};
     return {
-      id, kai,
+      id, kai, tc: h.tc || kai,
       pinyin: h.pinyin, freqRank: h.freqRank,
       direction: id.endsWith("/r") ? "recognize" : "produce",
       reps: st.reps || 0, state: st.state || 0,
@@ -92,26 +92,31 @@ class LocalEngine {
   }
 
   async state() {
+    // 新字不再按字頻自動灌入 —— 由「每日一句 / 唐詩選句」驅動（app 層組隊列）。
     const now = Date.now();
-    const today = this._localDay(now);
-    const metas = this._cardIds().map((id) => this._cardMeta(id));
-    const reviews = metas
-      .filter((m) => m.reps > 0 && m.due && m.due <= now)
-      .sort((a, b) => a.due - b.due);
-    const introducedToday = Object.values(this.cards).filter(
-      (c) => c.firstReview && this._localDay(c.firstReview) === today
-    ).length;
-    const allowance = Math.max(0, this.cfg.dailyNewLimit - introducedToday);
-    const news = metas.filter((m) => m.isNew).slice(0, allowance);
+    const started = new Set();
+    Object.entries(this.cards).forEach(([id, c]) => { if (c.reps > 0) started.add(id.slice(0, -2)); });
+    const reviews = started.size
+      ? this._cardIds()
+          .map((id) => this._cardMeta(id))
+          .filter((m) => m.reps > 0 && m.due && m.due <= now)
+          .sort((a, b) => a.due - b.due)
+      : [];
     return {
-      queue: [...reviews, ...news],
-      newCount: news.length,
+      queue: reviews,
+      newCount: 0,
       reviewCount: reviews.length,
       streak: this._streak(),
       dailyNewLimit: this.cfg.dailyNewLimit,
       geminiConfigured: false,
       mode: "static",
     };
+  }
+
+  /* 某字是否已學（任一方向卡有復習記錄）。 */
+  isStarted(kai) {
+    const c = this.cards[kai + "/r"], p = this.cards[kai + "/p"];
+    return !!((c && c.reps > 0) || (p && p.reps > 0));
   }
 
   _streak() {
@@ -168,7 +173,7 @@ class LocalEngine {
   async judge(kai) {
     return {
       score: 0, verdict: "fail", mode: "selfAssess", suggestedRating: 3,
-      feedback: `静态版无自动判定。对照范本比一比「${kai}」的结构，自己评个档。`,
+      feedback: `對照範本比一比「${kai}」的結構，自己評個檔。`,
     };
   }
 

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>flow-test</title></head><body>
+<pre id="out"></pre>
+<iframe id="f" src="index.html" style="width:400px;height:800px"></iframe>
+<script>
+const out = [];
+const ok = (name, cond) => out.push((cond ? "OK " : "FAIL ") + name);
+const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+
+(async () => {
+  try {
+    localStorage.clear();
+    const f = document.getElementById("f");
+    await new Promise(r => f.onload = r);
+    const w = f.contentWindow, d = f.contentDocument;
+    const E = (expr) => w.eval(expr);
+    const errs = [];
+    w.addEventListener("error", (e) => errs.push(e.message + " @ " + (e.filename || "").split("/").pop() + ":" + e.lineno));
+    window.__errs = errs;
+    await sleep(1200);
+
+    ok("app booted", E("typeof Engine === 'object' && typeof store === 'object'"));
+
+    await E("setDailyText('雲想衣裳花想容', {type:'self'})");
+    await sleep(300);
+    ok("daily set: " + E("store.daily.chars.map(c=>c.k+c.st[0]).join(',')"),
+       E("store.daily.chars.length >= 5"));
+    ok("雲→云 mapped as new", E("store.daily.chars.some(c=>c.k==='云'&&c.st==='new')"));
+
+    await E("Engine.state().then(s=>{window.__q = buildTodayQueue(s)})");
+    await sleep(200);
+    ok("queue built: " + E("__q.length") + " items, first=" + E("__q[0].kind"),
+       E("__q.length >= 5 && __q[0].kind === 'learn'"));
+    E("startSession(__q)");
+    await sleep(400);
+    ok("study visible", !d.getElementById("study").classList.contains("hidden"));
+    ok("trace phase shown", d.querySelector(".trace-glyph") != null);
+    let canvas = d.querySelector(".write-canvas");
+    ok("brush pad created", E("session.pad != null") && canvas != null);
+
+    const r = canvas.getBoundingClientRect();
+    canvas.dispatchEvent(new w.PointerEvent("pointerdown", { pointerId: 1, clientX: r.left + 40, clientY: r.top + 60, bubbles: true }));
+    for (let i = 0; i < 30; i++) {
+      await sleep(8);
+      canvas.dispatchEvent(new w.PointerEvent("pointermove", { pointerId: 1, clientX: r.left + 40 + i * 6, clientY: r.top + 60 + Math.sin(i / 3) * 24, bubbles: true }));
+    }
+    canvas.dispatchEvent(new w.PointerEvent("pointerup", { pointerId: 1, clientX: r.left + 220, clientY: r.top + 80, bubbles: true }));
+    await sleep(300);
+    ok("brush stroke drawn", E("session.pad.hasStrokes"));
+    const inked = E(`(() => {
+      const px = session.pad.ctx.getImageData(0, 0, 300, 150).data;
+      let n = 0;
+      for (let i = 3; i < px.length; i += 4) if (px[i] > 40) n++;
+      return n;
+    })()`);
+    ok("canvas has ink pixels: " + inked, inked > 200);
+
+    d.getElementById("p-next").click();
+    await sleep(300);
+    canvas = d.querySelector(".write-canvas");
+    ok("blind phase", d.querySelector(".trace-glyph") == null && canvas != null);
+    const r2 = canvas.getBoundingClientRect();
+    canvas.dispatchEvent(new w.PointerEvent("pointerdown", { pointerId: 2, clientX: r2.left + 60, clientY: r2.top + 60, bubbles: true }));
+    for (let i = 0; i < 12; i++) { await sleep(8); canvas.dispatchEvent(new w.PointerEvent("pointermove", { pointerId: 2, clientX: r2.left + 60 + i * 8, clientY: r2.top + 60 + i * 4, bubbles: true })); }
+    canvas.dispatchEvent(new w.PointerEvent("pointerup", { pointerId: 2, clientX: r2.left + 156, clientY: r2.top + 108, bubbles: true }));
+    await sleep(200);
+    d.getElementById("p-next").click();
+    await sleep(600);
+    ok("result screen with rating", d.querySelectorAll(".rating-btn").length === 4);
+    ok("masters gallery block", d.querySelector(".masters-block") != null);
+
+    d.querySelector(".rating-btn[data-r='3']").click();
+    await sleep(700);
+    const opts = [...d.querySelectorAll(".option-btn")];
+    ok("learnR recognize follows: " + opts.length + " options", opts.length === 4);
+    const correctKai = E("session.queue[session.idx].card.kai");
+    const correct = opts.find(b => b.dataset.k === correctKai);
+    ok("correct option present", !!correct);
+    correct.click();
+    await sleep(1200);
+    ok("recognize result", d.querySelectorAll(".rating-btn").length === 4);
+    d.querySelector(".rating-btn[data-r='3']").click();
+    await sleep(500);
+    ok("daily done marked: " + E("store.daily.done.join('')"), E("store.daily.done.length === 1"));
+    ok("fsrs graded both cards", E("Engine.isStarted(store.daily.done[0])"));
+
+    E("openPoemSheet()");
+    await sleep(1000);
+    ok("poem sheet open", !d.getElementById("poem-sheet").classList.contains("hidden"));
+    ok("poem rendered", d.querySelectorAll(".poem-line").length >= 2);
+    d.querySelector(".poem-line").click();
+    await sleep(100);
+    ok("line selectable", !d.getElementById("poem-use").disabled);
+    d.getElementById("poem-use").click();
+    await sleep(400);
+    ok("poem line becomes daily: " + E("store.daily.text"), E("store.daily.src.type === 'poem'"));
+  } catch (e) {
+    out.push("ERROR " + (e && e.stack || e));
+  }
+  (window.__errs || []).forEach((m) => out.push("IFRAME-ERR " + m));
+  document.getElementById("out").textContent = out.join("\n");
+  document.title = out.some(l => l.startsWith("FAIL") || l.startsWith("ERROR")) ? "TEST-FAIL" : "TEST-PASS";
+})();
+</script></body></html>

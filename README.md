@@ -1,50 +1,64 @@
-# 草書 · 入墨
+# 學書
 
-草书认字与手写练习 —— 「草书版多邻国 + Anki」。
-三千字库 · 一千常用字学习集 · FSRS 间隔重复 · 水墨双世界设计（宣纸浏览 / 入墨练习）。
+在每日書寫中學會草書 —— 每天寫下一句話（或從唐詩三百首選句），逐字入課：
+生字現學（描紅 → 盲寫 → 認字），熟字默寫，FSRS 間隔重複排期。
+全站繁體 · 水墨雙世界設計（宣紙瀏覽 / 入墨練習）。
 
-**正式版本只有一个：GitHub Pages 静态版 `https://fengjh97.github.io/caoshu/`。**
-盲写判定为对照范本自评；数据存浏览器 localStorage（设置页可导出/导入 JSON 备份）；
-真迹用预抓清单 + 图床 no-referrer 直连。
+**正式版本只有一個：GitHub Pages 靜態版 `https://fengjh97.github.io/caoshu/`。**
+盲寫判定為對照範本自評；數據存瀏覽器 localStorage（設置頁可導出/導入 JSON 備份）；
+真跡用預抓清單 + 圖床 no-referrer 直連。
 
-Flask 完整版（`app.py`：Gemini 打分 + Mac SQLite + 真迹实时代理）已退役，
-仅留作本地开发调试用，不再常驻。
+Flask 完整版（`app.py`：Gemini 打分 + Mac SQLite + 真跡實時代理）已退役，
+僅留作本地開發調試用，不再常駐。
 
-## 架构
+## 核心玩法
 
-- `static/` —— 无框架单页前端（引擎抽象层 `js/engine.js` 双模式：server / static）。
-  静态模式内置 FSRS-4.5 调度（`js/fsrs.js`）。设计系统见 `app.css` 头注。
-- `app.py` —— （退役，仅开发用）Flask 单文件后端：SQLite +
-  [py-fsrs](https://github.com/open-spaced-repetition/py-fsrs)，代理 Gemini 与书法字典真迹。
-- `data/chars.json` —— 3000 字库（字频序，含拼音），`core` 标记 1000 常用学习字
-  （《通用规范汉字表》一级字表 ∩ 字频前列，由 `scripts/build_chars.py` 生成）。
-- `data/decompositions.json` —— 前 500 高频字的草书符号拆解 / 楷草演变 / 易混字。
-- `docs/` —— Pages 静态版构建产物（`scripts/build_pages.py` 生成，勿手改）。
+- **每日一句**：自寫短句，逐字考草書；沒學過的字當天現學 —— 在實際使用中積累。
+- **唐詩模式**：寫不出句子時從《唐詩三百首》（320 首，繁體）選句或整首，
+  推薦算法按「每日生字目標」挑生字量合適的詩；學會的句子日後可整句草書創作。
+- **複習頁**：已學字的認字快練 + 點字重寫。
+- **名家真跡**：每字學完即看歷代名家的多種寫法 —— 用草書理解草書。
+
+## 架構
+
+- `static/` —— 無框架單頁前端（引擎抽象層 `js/engine.js` 雙模式：server / static）。
+  靜態模式內置 FSRS-4.5 調度（`js/fsrs.js`）；毛筆筆刷引擎 `js/brush.js`
+  （彈簧筆鋒 + 速度僞壓感 + stamp 鏈 + 多絲飛白 + 墨量衰減，頭注有原理）。
+  設計系統見 `app.css` 頭注；全站字體霞鶩文楷 TC（CDN 分片加載），草書字形鍾齊流江毛草。
+- `app.py` —— （退役，僅開發用）Flask 單文件後端。
+- `data/chars.json` —— 3000 字庫（字頻序，含拼音與 `tc` 繁體顯示形；`core` 標記 1000 學習字）。
+  內部 id 與草書字體碼位一律用簡體字，繁體僅作楷書顯示。
+- `data/decompositions.json` —— 前 500 高頻字的草書符號拆解 / 楷草演變 / 易混字（文案已轉繁體）。
+- `data/poems.json` —— 唐詩三百首（源 chinese-poetry，已剝校勘注）。
+- `docs/` —— Pages 靜態版構建產物（`scripts/build_pages.py` 生成，勿手改）。
 
 ## 常用命令
 
 ```bash
-.venv/bin/python scripts/build_chars.py          # 重建字库
-.venv/bin/python scripts/prefetch_manifests.py   # 补抓真迹清单（幂等，限速 4-6s，别改快）
-.venv/bin/python scripts/build_pages.py          # 重建 docs/（然后 commit + push 即部署）
-.venv/bin/python app.py                          # （开发调试）本地跑 Flask 版，PORT=8873
+.venv/bin/python scripts/build_chars.py          # 重建字庫（跑完必須再跑 build_tc.py 補繁體）
+.venv/bin/python scripts/build_tc.py             # 繁體字段 + 拆解轉繁 + 唐詩三百首
+.venv/bin/python scripts/prefetch_manifests.py   # 補抓真跡清單（冪等，限速 4-6s，別改快）
+.venv/bin/python scripts/build_pages.py          # 重建 docs/（然後 commit + push 即部署）
+.venv/bin/python app.py                          # （開發調試）本地跑 Flask 版，PORT=8873
 ```
 
-用户数据目录（Flask 版 SQLite / config / 真迹清单缓存）在
-`~/Library/Application Support/Caoshu/data`（`CAOSHU_DATA_DIR` 可覆写）——
-放 Documents 外是因为 macOS TCC 会挡住后台进程。真迹预抓也写到这里，
-`build_pages.py` 从这里取清单打进 `docs/`。
+冒煙測試見 `scripts/webtests/README.md`（無頭 Chrome 端到端：引擎鏈路 + 完整用戶流）。
 
-## 学习机制
+用戶數據目錄（Flask 版 SQLite / config / 真跡清單緩存）在
+`~/Library/Application Support/Caoshu/data`（`CAOSHU_DATA_DIR` 可覆寫）——
+放 Documents 外是因爲 macOS TCC 會擋住後台進程。真跡預抓也寫到這裏，
+`build_pages.py` 從這裏取清單打進 `docs/`。
 
-- 每字两张卡：认字（草→楷四选一）与书写（楷→草：新卡先描红、后盲写）。
-- FSRS 排期，每日新卡上限默认 10（设置页可调），按字频序引入。
-- 判定只看字形结构相似度（容错高，不计笔锋）；score ≥ 70 为 pass。
-- 静态版数据在浏览器本机，设置页可导出 / 导入 JSON 备份。
+## 學習機制
+
+- 每字兩張卡：認字（草→楷四選一）與書寫（楷→草：新卡先描紅、後盲寫）。
+- 新字只由「每日一句 / 唐詩選句」引入（不再按字頻自動灌入）；FSRS 排期複習。
+- 「每日生字目標」（設置頁）用於唐詩推薦選詩，默認 10。
+- 靜態版數據在瀏覽器本機，設置頁可導出 / 導入 JSON 備份。
 
 ## 注意
 
-- Gemini key 存用户数据目录的 `config.json`（设置页填入），静态版完全不含 key。
-- 真迹来源 shufazidian.com：搜索接口对高频请求会临时封禁（≈0.8s 间隔百余次即触发），
-  预抓脚本已内置 4-6s 随机限速与连败熔断，不要调快。
-- 字体：钟齐流江毛草（OFL），Pages 版只带 3000 字子集 woff2（956KB）。
+- 真跡來源 shufazidian.com：搜索接口對高頻請求會臨時封禁（≈0.8s 間隔百餘次即觸發，
+  封禁表現爲全 500），預抓腳本已內置 4-6s 隨機限速與連敗熔斷，不要調快。
+- 詩句繁體 → 字庫簡體靠 `tc` 反查映射；詩中約 600 生僻字在 3000 字庫外，UI 標「缺」跳過。
+- 字體：鍾齊流江毛草（OFL）子集 woff2 956KB；霞鶩文楷 TC 走 jsdelivr CDN。

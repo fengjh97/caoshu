@@ -1,7 +1,7 @@
 {
-  "name": "草書 · 入墨",
-  "short_name": "草書",
-  "description": "草书认字与手写练习 · FSRS 间隔重复 · 一千常用字",
+  "name": "學書",
+  "short_name": "學書",
+  "description": "在每日書寫中學會草書 · 每日一句 · 唐詩三百首 · FSRS 間隔重複",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#f3ecdd",

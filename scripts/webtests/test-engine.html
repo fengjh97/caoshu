@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>engine-test</title></head><body><pre id="out"></pre>
+<script src="js/config.js"></script>
+<script src="js/fsrs.js"></script>
+<script src="js/engine.js"></script>
+<script>
+const out = [];
+const ok = (name, cond) => out.push((cond ? "OK " : "FAIL ") + name);
+(async () => {
+  try {
+    localStorage.clear();
+    await Engine.init();
+    ok("init: 3000 chars", Engine.lib.length === 3000);
+    ok("tc field present", Engine.lib.some(c => c.tc && c.tc !== c.kai));
+    const s0 = await Engine.state();
+    ok("fresh state: empty queue", s0.queue.length === 0 && s0.reviewCount === 0);
+    ok("isStarted false", !Engine.isStarted("云"));
+    await Engine.grade("云/p", 3);
+    await Engine.grade("云/r", 3);
+    ok("isStarted true", Engine.isStarted("云"));
+    const opts = await Engine.options("云");
+    ok("options 4 incl target", opts.length === 4 && opts.includes("云"));
+    const d = await Engine.decomposition("云");
+    ok("decomposition ok", !!d && !d.error);
+    const poems = await fetch("data/poems.json").then(r => r.json());
+    ok("poems 320", poems.length === 320);
+    const byTC = new Map(); Engine.lib.forEach(c => { if (c.tc) byTC.set(c.tc, c); });
+    ok("學→学 mapping", byTC.get("學") && byTC.get("學").kai === "学");
+    const backup = Engine.exportData();
+    localStorage.clear();
+    await Engine.init();
+    Engine.importData(backup);
+    ok("import restores", Engine.isStarted("云"));
+  } catch (e) {
+    out.push("ERROR " + (e && e.stack || e));
+  }
+  document.getElementById("out").textContent = out.join("\n");
+  document.title = out.some(l => l.startsWith("FAIL") || l.startsWith("ERROR")) ? "TEST-FAIL" : "TEST-PASS";
+})();
+</script></body></html>

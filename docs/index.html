@@ -1,27 +1,26 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>草書 · 入墨</title>
-<meta name="description" content="草书认字与手写练习 · FSRS 间隔重复 · 一千常用字">
+<title>學書</title>
+<meta name="description" content="草書認字與手寫練習 · 每日一句 · 唐詩三百首 · FSRS 間隔重複">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="草書">
+<meta name="apple-mobile-web-app-title" content="學書">
 <meta name="theme-color" content="#f3ecdd">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <link rel="icon" href="icons/icon-192.png">
 <link rel="preload" href="fonts/LiuJianMaoCao-sub.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-tc-webfont@1.7.0/style.css">
 <link rel="stylesheet" href="app.css">
 </head>
 <body>
 
-<!-- 氛围层：宣纸纹理 + 墨晕 + 幽灵巨字 -->
+<!-- 氛圍層：宣紙紋理 + 墨暈 + 幽靈巨字 -->
 <div id="atmo" aria-hidden="true">
   <div class="blob blob-a"></div>
   <div class="blob blob-b"></div>
@@ -35,7 +34,7 @@
   <main id="view-today" class="view">
     <div class="home-grid">
       <div class="home-main">
-        <p class="date-line reveal" style="--i:0"><span id="home-date">…</span><span id="home-streak" class="streak-chip hidden">连 0 天</span></p>
+        <p class="date-line reveal" style="--i:0"><span id="home-date">…</span><span id="home-streak" class="streak-chip hidden">連 0 天</span></p>
 
         <div class="ring-block reveal" style="--i:1">
           <svg class="ring" viewBox="0 0 200 200">
@@ -44,46 +43,49 @@
           </svg>
           <div class="ring-center">
             <div id="ring-num" class="ring-num">–</div>
-            <div id="ring-sub" class="ring-sub">今日待练</div>
+            <div id="ring-sub" class="ring-sub">今日待練</div>
           </div>
         </div>
 
         <div class="stat-chips reveal" style="--i:2">
-          <span class="chip"><b id="chip-new">0</b> 新学</span>
+          <span class="chip"><b id="chip-new">0</b> 新學</span>
           <span class="chip-sep">·</span>
-          <span class="chip"><b id="chip-review">0</b> 复习</span>
+          <span class="chip"><b id="chip-review">0</b> 複習</span>
         </div>
-
-        <button id="btn-start" class="btn-primary reveal" style="--i:3" disabled>
-          <span class="btn-ink-word">入墨</span><span class="btn-rest">开始练习</span>
-        </button>
-        <p id="home-note" class="mode-note reveal" style="--i:4"></p>
       </div>
 
       <div class="v-title-col" aria-hidden="true">
-        <div class="v-title brush-reveal">草書</div>
+        <div class="v-title brush-reveal">學書</div>
         <div class="v-seal">入墨</div>
       </div>
     </div>
+
+    <!-- 今日文句：自寫短句 / 唐詩選句 -->
+    <section id="daily-block" class="reveal" style="--i:3"></section>
+
+    <button id="btn-start" class="btn-primary reveal" style="--i:4" disabled>
+      <span class="btn-ink-word">入墨</span><span class="btn-rest">開始練習</span>
+    </button>
+    <p id="home-note" class="mode-note reveal" style="--i:5"></p>
   </main>
 
-  <!-- ================= 认字 ================= -->
-  <main id="view-recognize" class="view hidden">
+  <!-- ================= 複習 ================= -->
+  <main id="view-review" class="view hidden">
     <header class="page-head">
-      <h1>认字</h1>
+      <h1>複習</h1>
       <span id="quiz-tally" class="streak-chip hidden">0 / 0</span>
     </header>
-    <p class="page-sub">自由练 · 不影响复习排期</p>
-    <section id="quiz-body"></section>
+    <p class="page-sub">學過的字 · 認一認，再寫一寫</p>
+    <section id="review-body"></section>
   </main>
 
-  <!-- ================= 拆解 ================= -->
+  <!-- ================= 字庫 ================= -->
   <main id="view-decomp" class="view hidden">
     <div id="decomp-index">
-      <header class="page-head"><h1>拆解</h1><span class="page-count" id="lib-count"></span></header>
+      <header class="page-head"><h1>字庫</h1><span class="page-count" id="lib-count"></span></header>
       <input id="decomp-search" class="field" type="search" placeholder="搜字 · 拼音" autocomplete="off">
       <div class="filter-row">
-        <button class="filter-pill active" data-filter="core">学习字表</button>
+        <button class="filter-pill active" data-filter="core">學習字表</button>
         <button class="filter-pill" data-filter="all">全部三千字</button>
       </div>
       <div id="char-grid" class="char-grid"></div>
@@ -91,22 +93,34 @@
     <div id="decomp-detail" class="hidden"></div>
   </main>
 
-  <!-- ================= 进度 ================= -->
+  <!-- ================= 進度 ================= -->
   <main id="view-progress" class="view hidden">
-    <header class="page-head"><h1>进度</h1></header>
+    <header class="page-head"><h1>進度</h1></header>
     <section id="progress-body"></section>
   </main>
 
-  <!-- ================= 设置 ================= -->
+  <!-- ================= 設置 ================= -->
   <main id="view-settings" class="view hidden">
-    <header class="page-head"><h1>设置</h1></header>
+    <header class="page-head"><h1>設置</h1></header>
     <section id="settings-body"></section>
   </main>
 
 </div>
 
-<!-- ================= 练习：全屏沉浸层（入墨） ================= -->
-<div id="study" class="study hidden" role="dialog" aria-label="练习">
+<!-- ================= 唐詩選句層 ================= -->
+<div id="poem-sheet" class="poem-sheet hidden" role="dialog" aria-label="唐詩選句">
+  <div class="poem-sheet-inner">
+    <header class="poem-head">
+      <button id="poem-close" class="ghost-btn" aria-label="關閉">✕</button>
+      <h2>唐詩三百首 · 選句入課</h2>
+    </header>
+    <input id="poem-search" class="field" type="search" placeholder="搜詩題 · 作者 · 詩句" autocomplete="off">
+    <div id="poem-body"></div>
+  </div>
+</div>
+
+<!-- ================= 練習：全屏沉浸層（入墨） ================= -->
+<div id="study" class="study hidden" role="dialog" aria-label="練習">
   <header class="study-head">
     <button id="btn-exit-study" class="ghost-btn" aria-label="退出">✕</button>
     <div class="study-line"><div id="study-line-fill"></div></div>
@@ -115,17 +129,18 @@
   <section id="study-stage" class="study-stage"></section>
 </div>
 
-<nav id="dock" aria-label="主导航">
+<nav id="dock" aria-label="主導航">
   <button class="dock-item active" data-view="today"><span class="dock-glyph">今</span><span class="dock-label">今日</span></button>
-  <button class="dock-item" data-view="recognize"><span class="dock-glyph">认</span><span class="dock-label">认字</span></button>
-  <button class="dock-item" data-view="decomp"><span class="dock-glyph">拆</span><span class="dock-label">拆解</span></button>
-  <button class="dock-item" data-view="progress"><span class="dock-glyph">进</span><span class="dock-label">进度</span></button>
-  <button class="dock-item" data-view="settings"><span class="dock-glyph">设</span><span class="dock-label">设置</span></button>
+  <button class="dock-item" data-view="review"><span class="dock-glyph">復</span><span class="dock-label">複習</span></button>
+  <button class="dock-item" data-view="decomp"><span class="dock-glyph">庫</span><span class="dock-label">字庫</span></button>
+  <button class="dock-item" data-view="progress"><span class="dock-glyph">進</span><span class="dock-label">進度</span></button>
+  <button class="dock-item" data-view="settings"><span class="dock-glyph">設</span><span class="dock-label">設置</span></button>
 </nav>
 
 <script src="js/config.js"></script>
 <script src="js/fx.js"></script>
 <script src="js/fsrs.js"></script>
+<script src="js/brush.js"></script>
 <script src="js/engine.js"></script>
 <script src="js/app.js"></script>
 </body>

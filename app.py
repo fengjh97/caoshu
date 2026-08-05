@@ -221,6 +221,12 @@ def manifest():
     return send_from_directory(BASE / "static", "manifest.webmanifest")
 
 
+@app.route("/data/<path:name>")
+def data_file(name):
+    """內容 JSON（chars/decompositions/poems）—— 與靜態版同路徑，前端零分支。"""
+    return send_from_directory(CONTENT, name)
+
+
 # ---------------------------------------------------------------- API：状态 / 队列
 
 
