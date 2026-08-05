@@ -59,36 +59,42 @@ def fetch(kai: str) -> list[str]:
 
 
 def main() -> None:
+    """自適應退避採集：成功保持 ~5s 節奏，失敗指數退避（30s → 10min 封頂）。
+
+    站點限流像個很小的令牌桶（一陣只放兩三個請求），固定間隔會整輪撞牆；
+    退避讓節奏自動貼合實際放行速率。隊列輪轉，失敗的字下一圈再試，直到全清。
+    """
     chars = json.loads((BASE / "data" / "chars.json").read_text("utf-8"))
     # 學習字表優先，詩字擴展跟後
-    core = [c["kai"] for c in chars if c["core"]] + [
+    targets = [c["kai"] for c in chars if c["core"]] + [
         c["kai"] for c in chars if c.get("poem")
     ]
-    done = ok = fail = streak_fail = 0
-    for kai in core:
-        path = OUT / (f"{ord(kai)}.json")
-        if path.exists():
-            done += 1
-            continue
-        try:
-            urls = fetch(kai)
-            path.write_text(json.dumps(urls, ensure_ascii=False), encoding="utf-8")
-            ok += 1
-            streak_fail = 0
-            time.sleep(4 + random.random() * 2)
-        except requests.RequestException as e:
-            fail += 1
-            streak_fail += 1
-            print(f"fail {kai}: {e}", file=sys.stderr)
-            # 站點對高頻字（大結果集）常態性 500，並非只有封禁一種原因，
-            # 熔斷放寬到 25 連敗；失敗後多歇一會。
-            if streak_fail >= 25:
-                print("连续失败 25 次，疑似被限流，停止。稍后再跑（幂等续传）。")
-                break
-            time.sleep(8 + random.random() * 4)
-        if (ok + fail) % 50 == 0 and (ok + fail):
-            print(f"progress: skip {done} ok {ok} fail {fail}", flush=True)
-    print(f"done: skip {done} ok {ok} fail {fail}")
+    ok = fail = 0
+    backoff = 0.0
+    for round_no in range(1, 41):
+        pending = [k for k in targets if not (OUT / f"{ord(k)}.json").exists()]
+        if not pending:
+            break
+        print(f"round {round_no}: pending {len(pending)}", flush=True)
+        for kai in pending:
+            try:
+                urls = fetch(kai)
+                (OUT / f"{ord(kai)}.json").write_text(
+                    json.dumps(urls, ensure_ascii=False), encoding="utf-8"
+                )
+                ok += 1
+                backoff = 0.0
+                if ok % 25 == 0:
+                    print(f"progress: ok {ok} fail {fail}", flush=True)
+                time.sleep(4 + random.random() * 2)
+            except requests.RequestException as e:
+                fail += 1
+                backoff = min(600.0, backoff * 2 if backoff else 30.0)
+                if fail % 25 == 1:
+                    print(f"fail {kai}: {e} (backoff {backoff:.0f}s)", file=sys.stderr, flush=True)
+                time.sleep(backoff + random.random() * 5)
+    remaining = sum(1 for k in targets if not (OUT / f"{ord(k)}.json").exists())
+    print(f"done: ok {ok} fail {fail} remaining {remaining}")
 
 
 if __name__ == "__main__":
