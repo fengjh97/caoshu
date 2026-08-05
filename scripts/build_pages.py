@@ -5,11 +5,19 @@ docs/ = static/ 全量 + data JSON + 真迹清单 + config.js 覆写为静态模
 """
 
 import json
+import os
 import shutil
 from pathlib import Path
 
 BASE = Path(__file__).resolve().parent.parent
 DOCS = BASE / "docs"
+# 真迹清单缓存在用户数据目录（Documents 外），与 app.py / prefetch 一致。
+DATA = Path(
+    os.environ.get(
+        "CAOSHU_DATA_DIR",
+        Path.home() / "Library" / "Application Support" / "Caoshu" / "data",
+    )
+)
 
 
 def main() -> None:
@@ -30,11 +38,11 @@ def main() -> None:
     shutil.copy(BASE / "data" / "chars.json", data / "chars.json")
     shutil.copy(BASE / "data" / "decompositions.json", data / "decompositions.json")
 
-    calli_src = BASE / "data" / "calligraphy"
+    calli_src = DATA / "calligraphy"
     calli_dst = data / "calligraphy"
     calli_dst.mkdir()
     n = 0
-    for f in sorted(calli_src.glob("*.json")):
+    for f in sorted(calli_src.glob("*.json")) if calli_src.exists() else []:
         # 只带清单 JSON（图片本体不进仓库，前端 no-referrer 直连图床）。
         urls = json.loads(f.read_text("utf-8"))
         if urls:

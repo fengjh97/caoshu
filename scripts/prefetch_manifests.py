@@ -7,6 +7,7 @@ Pages 版前端直接 fetch 这些 JSON，图片 no-referrer 直连图床。
 """
 
 import json
+import os
 import random
 import re
 import sys
@@ -16,8 +17,14 @@ from pathlib import Path
 import requests
 
 BASE = Path(__file__).resolve().parent.parent
-OUT = BASE / "data" / "calligraphy"
-OUT.mkdir(exist_ok=True)
+DATA = Path(
+    os.environ.get(
+        "CAOSHU_DATA_DIR",
+        Path.home() / "Library" / "Application Support" / "Caoshu" / "data",
+    )
+)
+OUT = DATA / "calligraphy"
+OUT.mkdir(parents=True, exist_ok=True)
 
 ALLOWED = ("shufazidian.com", "9610.com", "sfzd.cn")
 UA = "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)"

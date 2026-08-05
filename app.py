@@ -7,6 +7,7 @@
 import base64
 import hashlib
 import json
+import os
 import re
 import sqlite3
 import threading
@@ -20,7 +21,14 @@ from fsrs import Rating as FSRSRating
 from fsrs import Scheduler
 
 BASE = Path(__file__).resolve().parent
-DATA = BASE / "data"
+CONTENT = BASE / "data"  # 随代码走的内容文件：chars.json / decompositions.json
+# 用户数据（SQLite/config/真迹缓存）放 Documents 保护区外，launchd 才能读写。
+DATA = Path(
+    os.environ.get(
+        "CAOSHU_DATA_DIR",
+        Path.home() / "Library" / "Application Support" / "Caoshu" / "data",
+    )
+)
 DB_PATH = DATA / "caoshu.db"
 CONFIG_PATH = DATA / "config.json"
 CALLIG_DIR = DATA / "calligraphy"
@@ -38,9 +46,9 @@ _db_lock = threading.Lock()
 
 # ---------------------------------------------------------------- 内容（静态 JSON）
 
-with open(DATA / "chars.json", encoding="utf-8") as f:
+with open(CONTENT / "chars.json", encoding="utf-8") as f:
     FREQ_TABLE = json.load(f)  # [{kai, pinyin, freqRank, core}] 3000 字库
-with open(DATA / "decompositions.json", encoding="utf-8") as f:
+with open(CONTENT / "decompositions.json", encoding="utf-8") as f:
     DECOMPOSITIONS = {d["kai"]: d for d in json.load(f)}
 HANZI_BY_KAI = {h["kai"]: h for h in FREQ_TABLE}
 CORE_TABLE = [h for h in FREQ_TABLE if h.get("core")]  # 1000 学习字
@@ -75,7 +83,7 @@ def db() -> sqlite3.Connection:
 
 
 def init_db() -> None:
-    DATA.mkdir(exist_ok=True)
+    DATA.mkdir(parents=True, exist_ok=True)
     CALLIG_DIR.mkdir(exist_ok=True)
     with db() as conn:
         conn.executescript(

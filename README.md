@@ -30,9 +30,14 @@
 .venv/bin/python scripts/build_chars.py          # 重建字库
 .venv/bin/python scripts/build_pages.py          # 重建 docs/（然后 commit + push 即部署）
 .venv/bin/python scripts/prefetch_manifests.py   # 补抓真迹清单（幂等，限速 4-6s，别改快）
+python3 scripts/install_launchd.py               # 安装/更新常驻服务（改完后端代码重跑即生效）
 ```
 
-launchd 常驻：`launchd/com.nianian.caoshu.plist` → `~/Library/LaunchAgents/`。
+launchd 常驻：macOS TCC 保护 `~/Documents`，LaunchAgent 进不来（spawn 直接
+EX_CONFIG=78 失败），所以 `install_launchd.py` 把运行时镜像到
+`~/Library/Application Support/Caoshu/runtime` 并从那里跑。用户数据（SQLite /
+config / 真迹缓存）统一在 `~/Library/Application Support/Caoshu/data`
+（`CAOSHU_DATA_DIR` 可覆写），手动跑与常驻跑同一份；日志在同目录 `logs/server.log`。
 
 ## 学习机制
 
@@ -43,7 +48,7 @@ launchd 常驻：`launchd/com.nianian.caoshu.plist` → `~/Library/LaunchAgents/
 
 ## 注意
 
-- Gemini key 存 `data/config.json`（gitignore），静态版完全不含 key。
+- Gemini key 存用户数据目录的 `config.json`（设置页填入），静态版完全不含 key。
 - 真迹来源 shufazidian.com：搜索接口对高频请求会临时封禁（≈0.8s 间隔百余次即触发），
   预抓脚本已内置 4-6s 随机限速与连败熔断，不要调快。
 - 字体：钟齐流江毛草（OFL），Pages 版只带 3000 字子集 woff2（956KB）。
