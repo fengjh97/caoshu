@@ -575,8 +575,10 @@ async function fillGallery(sel, kai, emptyHint) {
     return;
   }
   g.innerHTML = items.map((it, i) => {
-    const u = typeof it === "string" ? it : it.u;
     const by = typeof it === "string" ? "" : (it.by || "");
+    // 本地縮略圖優先（iOS Safari 對 39017 圖床熱鏈拿不到圖）；無 f 回退遠程
+    const u = typeof it === "string" ? it
+      : it.f ? `data/calligraphy_img/${it.f}` : it.u;
     const noRef = /shufazidian|9610\.com|sfzd\.cn/.test(u);
     return `<figure class="g-item" style="--i:${i}">
       <img src="${u}" loading="lazy"${noRef ? ' referrerpolicy="no-referrer"' : ""} alt="真跡${by ? " · " + by : ""}">

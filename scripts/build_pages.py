@@ -39,6 +39,11 @@ def main() -> None:
     shutil.copy(BASE / "data" / "decompositions.json", data / "decompositions.json")
     shutil.copy(BASE / "data" / "poems.json", data / "poems.json")
 
+    # 真跡縮略圖（自託管 webp；iOS Safari 熱鏈外部圖床拿不到圖）
+    img_src = DATA / "calligraphy_img"
+    if img_src.exists():
+        shutil.copytree(img_src, data / "calligraphy_img")
+
     calli_src = DATA / "calligraphy"
     calli_dst = data / "calligraphy"
     calli_dst.mkdir()
