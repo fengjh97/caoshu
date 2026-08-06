@@ -59,8 +59,11 @@ Flask 完整版（`app.py`：Gemini 打分 + Mac SQLite + 真跡實時代理）�
 
 ## 注意
 
-- 真跡來源 shufazidian.com：搜索接口對高頻請求會臨時封禁（≈0.8s 間隔百餘次即觸發，
-  封禁表現爲全 500），預抓腳本已內置 4-6s 隨機限速與連敗熔斷，不要調快。
+- 真跡來源 shufa.guoxuedashi.com：碼點即 URL（`/{HEX}/3/`，3=草書），無需搜索接口，
+  含書法家署名；圖床 pic.39017.com 要求「非空 Referer + 瀏覽器 UA」但不校驗域名，
+  前端熱鏈靠瀏覽器默認 referer（這些 img 千萬別加 no-referrer）。
+  舊源 shufazidian.com 已棄用：限流極狠（一陣只放行兩三個請求），且 sort 碼
+  易錯（7=草書 8=行書 9=楷書）。清單格式 `[{u, by}]`，前端兼容舊版純 URL 數組。
 - 詩句繁體 → 字庫靠 `tc`/`sc` 映射；唐詩用字僅 52 個因字體無字形不可學，UI 標「缺」跳過。
 - 字體：鍾齊流江毛草（OFL）基礎子集 956KB + 詩字擴展包 433KB（unicode-range 按需加載，
   勿用本地管線重生成基礎包——比 Google Fonts 優化輪廓大一倍）；霞鶩文楷 TC 走 jsdelivr CDN。

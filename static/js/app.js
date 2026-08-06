@@ -562,14 +562,27 @@ function renderProduceResult(item) {
   bindRating(item);
 }
 
+/* 清單兼容兩種格式：[{u, by}]（含書法家署名）或純 URL 數組（舊）。
+   referrer 策略按圖床：39017/國學大師要求非空 referer（默認即可）；
+   書法字典系圖床反之要求 no-referrer。 */
 async function fillGallery(sel, kai, emptyHint) {
-  let urls = [];
-  try { urls = await Engine.calligraphy(kai); } catch {}
+  let items = [];
+  try { items = await Engine.calligraphy(kai); } catch {}
   const g = $(sel);
   if (!g) return;
-  g.innerHTML = urls.length
-    ? urls.map((u, i) => `<img src="${u}" style="--i:${i}" loading="lazy" referrerpolicy="no-referrer" alt="真跡">`).join("")
-    : `<span class="empty-note">${emptyHint || "暫無真跡（離線或來源站不可用）"}</span>`;
+  if (!items.length) {
+    g.innerHTML = `<span class="empty-note">${emptyHint || "暫無真跡（離線或來源站不可用）"}</span>`;
+    return;
+  }
+  g.innerHTML = items.map((it, i) => {
+    const u = typeof it === "string" ? it : it.u;
+    const by = typeof it === "string" ? "" : (it.by || "");
+    const noRef = /shufazidian|9610\.com|sfzd\.cn/.test(u);
+    return `<figure class="g-item" style="--i:${i}">
+      <img src="${u}" loading="lazy"${noRef ? ' referrerpolicy="no-referrer"' : ""} alt="真跡${by ? " · " + by : ""}">
+      ${by ? `<figcaption>${by}</figcaption>` : ""}
+    </figure>`;
+  }).join("");
 }
 
 /* ---- 認字卡 ---- */
@@ -948,7 +961,7 @@ async function renderSettings() {
       <p class="fine-print">學書 —— 在每日書寫中學會草書<br>
       每日一句 · 唐詩三百首 · 三千字庫 · FSRS 間隔重複<br>
       刊頭「學」王羲之《學書帖》 · 「書」歐陽詢《卜商帖》<br>
-      字體 霞鶩文楷 TC / 鍾齊流江毛草（皆開源）· 真跡 書法字典</p>
+      字體 霞鶩文楷 TC / 鍾齊流江毛草（皆開源）· 真跡 國學大師書法庫</p>
     </div>`;
   $("#lim-m").addEventListener("click", () => bumpLimit(-1));
   $("#lim-p").addEventListener("click", () => bumpLimit(1));

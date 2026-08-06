@@ -444,11 +444,18 @@ body.night .ghost-glyph { color: var(--night-text); opacity: 0.04; }
   display: flex; gap: 10px; overflow-x: auto; padding: 2px 2px 8px;
   -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity;
 }
-.gallery img {
-  height: 158px; border-radius: 10px; flex: 0 0 auto; scroll-snap-align: start;
-  background: #fff; border: 1px solid var(--paper-edge);
-  animation: rise 0.5s var(--ease-out) both;
+.gallery .g-item {
+  flex: 0 0 auto; margin: 0; scroll-snap-align: start; text-align: center;
+  animation: rise 0.5s var(--ease-out) both; animation-delay: calc(min(var(--i), 8) * 45ms);
 }
+.gallery img {
+  height: 148px; border-radius: 10px; display: block;
+  background: #fff; border: 1px solid var(--paper-edge);
+}
+.gallery figcaption {
+  font-size: 11.5px; color: var(--ink-3); margin-top: 4px; letter-spacing: 0.05em;
+}
+.night-gallery figcaption { color: var(--night-text-2); }
 .empty-note { color: var(--ink-3); font-size: 13px; }
 
 /* ==================== 进度 ==================== */
@@ -670,7 +677,7 @@ body.sheet-open { overflow: hidden; }
 .masters-cap {
   font-size: 12.5px; color: var(--night-text-2); letter-spacing: 0.14em; margin-bottom: 10px;
 }
-.night-gallery img { height: 120px; background: var(--paper-hi); border-color: var(--night-edge); }
+.night-gallery img { height: 112px; background: var(--paper-hi); border-color: var(--night-edge); }
 
 /* 複習頁重寫格 */
 .rw-grid { grid-template-columns: repeat(5, 1fr); }
