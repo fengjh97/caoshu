@@ -630,6 +630,25 @@ body.night #dock { transform: translateX(-50%) translateY(140%); opacity: 0; poi
 }
 .mode-note { margin-top: 6px; font-size: 11px; }
 
+/* 按鈕內小墨字（草書「入墨」前綴） */
+.btn-ink-sm { font-family: var(--cursive); font-size: 19px; line-height: 1; margin-right: 7px; vertical-align: -2px; }
+
+/* 卡片標題行內的小膠囊按鈕（複習頁「隨機十字」） */
+.pill-btn {
+  font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: 0.05em;
+  color: var(--cinnabar); background: var(--cinnabar-soft);
+  border: 1.2px solid rgba(197, 57, 31, 0.4); border-radius: 99px;
+  padding: 4px 12px; margin-left: 10px; cursor: pointer;
+  transition: transform 0.15s var(--ease-out);
+}
+.pill-btn:active { transform: scale(0.94); }
+
+/* 今日已畢的一行小結 */
+.daily-done-line {
+  color: var(--ink-3); font-size: 13px; margin: 0 0 10px; letter-spacing: 0.04em;
+  display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;
+}
+
 /* ==================== 唐詩選句層 ==================== */
 
 .poem-sheet {

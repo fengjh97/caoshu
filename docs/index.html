@@ -68,20 +68,16 @@
     <section id="daily-block" class="reveal" style="--i:2"></section>
 
     <div class="home-foot reveal" style="--i:3">
-      <button id="btn-start" class="btn-primary" disabled>
-        <span class="btn-ink-word">入墨</span><span class="btn-rest">開始練習</span>
+      <button id="btn-start" class="btn-primary hidden" disabled>
+        <span class="btn-ink-word">入墨</span><span class="btn-rest" id="btn-start-label">開始練習</span>
       </button>
-      <p id="home-note" class="mode-note"></p>
     </div>
   </main>
 
   <!-- ================= 複習 ================= -->
   <main id="view-review" class="view hidden">
-    <header class="page-head">
-      <h1>複習</h1>
-      <span id="quiz-tally" class="streak-chip hidden">0 / 0</span>
-    </header>
-    <p class="page-sub">學過的字 · 認一認，再寫一寫</p>
+    <header class="page-head"><h1>複習</h1></header>
+    <p class="page-sub">學過的字 · 認一認，寫一寫</p>
     <section id="review-body"></section>
   </main>
 
