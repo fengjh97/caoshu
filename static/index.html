@@ -35,8 +35,8 @@
   <main id="view-today" class="view view-home">
     <p class="date-line reveal" style="--i:0"><span id="home-date">…</span><span id="home-streak" class="streak-chip hidden">連 0 天</span></p>
 
-    <div class="home-top">
-      <div class="home-main reveal" style="--i:1">
+    <div class="home-top reveal" style="--i:1">
+      <div class="home-main">
         <div class="ring-block">
           <svg class="ring" viewBox="0 0 200 200">
             <circle class="ring-track" cx="100" cy="100" r="86"/>
@@ -47,10 +47,10 @@
             <div id="ring-sub" class="ring-sub">今日待練</div>
           </div>
         </div>
-        <div class="stat-chips">
-          <span class="chip"><b id="chip-new">0</b> 新學</span>
-          <span class="chip-sep">·</span>
-          <span class="chip"><b id="chip-review">0</b> 複習</span>
+        <div class="stat-col">
+          <div class="stat"><b id="chip-new">0</b><span>新學</span></div>
+          <div class="stat-rule"></div>
+          <div class="stat"><b id="chip-review">0</b><span>複習</span></div>
         </div>
       </div>
 

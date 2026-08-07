@@ -191,8 +191,10 @@ async function refreshToday() {
   const doneCount = d ? d.done.length : 0;
   const total = remaining + doneCount + (s.doneToday || 0);
 
+  const oldPending = pending.length - newPending;
   $("#chip-new").textContent = newPending;
-  $("#chip-review").textContent = s.reviewCount + pending.length - newPending;
+  $("#chip-review").textContent = s.reviewCount + oldPending;
+  $(".stat-col").classList.toggle("dim", newPending === 0 && s.reviewCount + oldPending === 0);
 
   const chip = $("#home-streak");
   chip.classList.toggle("hidden", !s.streak);

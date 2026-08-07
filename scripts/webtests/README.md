@@ -7,7 +7,7 @@
 cp scripts/webtests/test-*.html docs/
 ( cd docs && python3 -m http.server 8123 & )
 CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-"$CHROME" --headless --disable-gpu --dump-dom --virtual-time-budget=40000 \
+"$CHROME" --headless=new --disable-gpu --dump-dom --virtual-time-budget=40000 \
   http://localhost:8123/test-flow.html 2>/dev/null | grep -Eo '(OK|FAIL|ERROR)[^<]*'
 rm docs/test-*.html
 ```
