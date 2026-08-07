@@ -244,6 +244,7 @@ function renderDailyBlock() {
   const srcLabel = d.src.type === "poem"
     ? `${d.src.t} · ${d.src.a}`
     : "自寫一句";
+  const cleared = pendingSentenceChars().length === 0 && d.done.length > 0;
   el.innerHTML = `
     <div class="card daily-card">
       <div class="sec-label">今日文句<span class="daily-src">${srcLabel}</span></div>
@@ -256,9 +257,19 @@ function renderDailyBlock() {
           return `<span class="dchar ${cls}" data-k="${c.k}"><span class="dchar-g">${c.tc}</span><span class="dchar-t">${tag}</span></span>`;
         }).join("")}
       </div>
-      <button class="link-btn" id="daily-clear">換一句</button>
+      ${cleared
+        ? `<div class="btn-row">
+            <button class="btn" id="daily-extra">加練一句</button>
+            <button class="btn ghost" id="daily-extra-poem">再選唐詩</button>
+          </div>`
+        : `<button class="link-btn" id="daily-clear">換一句</button>`}
     </div>`;
-  $("#daily-clear").addEventListener("click", clearDaily);
+  const clearBtn = $("#daily-clear");
+  if (clearBtn) clearBtn.addEventListener("click", clearDaily);
+  const extraBtn = $("#daily-extra");
+  if (extraBtn) extraBtn.addEventListener("click", clearDaily);
+  const extraPoem = $("#daily-extra-poem");
+  if (extraPoem) extraPoem.addEventListener("click", () => { clearDaily(); openPoemSheet(); });
   el.querySelectorAll(".dchar:not(.miss)").forEach((c) =>
     c.addEventListener("click", () => openDecomp(c.dataset.k, "today"))
   );
@@ -693,11 +704,15 @@ function renderDone() {
   stageHTML(`
     <div class="done-screen">
       <div class="big glyph-ink">畢</div>
-      <p>今日 ${session.done} 張卡 · 已入冊</p>
+      <p>本輪 ${session.done} 張卡 · 已入冊</p>
       <span class="seal-stamp">連 ${store.state ? store.state.streak : 0} 天</span>
-      <div><button id="btn-back" class="btn" style="max-width:280px;margin:0 auto">出墨 · 回到今日</button></div>
+      <div class="btn-row" style="max-width:320px;margin:0 auto">
+        <button id="btn-extra" class="btn ghost">加練一句</button>
+        <button id="btn-back" class="btn">出墨</button>
+      </div>
     </div>`);
   $("#btn-back").addEventListener("click", closeSession);
+  $("#btn-extra").addEventListener("click", () => { clearDaily(); closeSession(); });
 }
 
 /* ================= 複習 ================= */
@@ -718,6 +733,11 @@ async function renderReview() {
       <div id="quiz-body"></div>
     </div>
     <div class="card">
+      <div class="sec-label">隨機加練<span class="daily-src">計入排期</span></div>
+      <p class="daily-hint">隨機抽已學字盲寫重練，寫得多記得牢。</p>
+      <button class="btn" id="btn-random-drill">隨機重寫 ${Math.min(10, started.length)} 字</button>
+    </div>
+    <div class="card">
       <div class="sec-label">重寫一遍<span class="daily-src">已學 ${started.length} 字 · 點字入墨</span></div>
       <div class="char-grid rw-grid">
         ${started.map((c, i) =>
@@ -725,6 +745,17 @@ async function renderReview() {
         ).join("")}
       </div>
     </div>`;
+  $("#btn-random-drill").addEventListener("click", () => {
+    const pool = started.slice();
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+    startSession(pool.slice(0, 10).map((c) => ({
+      kind: "free",
+      card: { id: c.kai + "/p", kai: c.kai, tc: c.tc || c.kai, pinyin: c.pinyin || "", direction: "produce", isNew: false },
+    })));
+  });
   if (started.length >= 4) startQuiz(started);
   else $("#quiz-body").innerHTML = `<p class="empty-note">學滿 4 個字後開放快練。</p>`;
   body.querySelectorAll(".rw-grid .char-cell").forEach((cell) =>
